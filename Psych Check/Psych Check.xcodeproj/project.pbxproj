@@ -12,7 +12,6 @@
 		845ABE581E4A5ED400D232DC /* Psych_CheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE571E4A5ED400D232DC /* Psych_CheckTests.swift */; };
 		845ABE631E4A5ED400D232DC /* Psych_CheckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE621E4A5ED400D232DC /* Psych_CheckUITests.swift */; };
 		845ABE711E4A5EEA00D232DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845ABE701E4A5EEA00D232DC /* Assets.xcassets */; };
-		845ABE731E4A5EF400D232DC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 845ABE721E4A5EF400D232DC /* Info.plist */; };
 		845ABE761E4A5F0800D232DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE741E4A5F0800D232DC /* AppDelegate.swift */; };
 		845ABE771E4A5F0800D232DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE751E4A5F0800D232DC /* ViewController.swift */; };
 		846140471E4AD6F70076F911 /* DepressionScales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846140461E4AD6F70076F911 /* DepressionScales.swift */; };
@@ -269,7 +268,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845ABE731E4A5EF400D232DC /* Info.plist in Resources */,
 				845ABE4D1E4A5ED400D232DC /* LaunchScreen.storyboard in Resources */,
 				845ABE711E4A5EEA00D232DC /* Assets.xcassets in Resources */,
 				845ABE481E4A5ED400D232DC /* Main.storyboard in Resources */,

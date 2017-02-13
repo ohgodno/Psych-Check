@@ -75,7 +75,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="8Gh-Es-Y2x">
-                                <rect key="frame" x="16" y="182" width="343" height="125"/>
+                                <rect key="frame" x="16" y="162" width="343" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="ISy-0I-uUc"/>
                                 </constraints>
@@ -84,7 +84,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kfy-nC-30m">
-                                <rect key="frame" x="16" y="323" width="343" height="240"/>
+                                <rect key="frame" x="16" y="325" width="343" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ES-2ev">
                                         <rect key="frame" x="98" y="0.0" width="147" height="60"/>
@@ -122,13 +122,13 @@
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlc-vr-yTw">
-                                <rect key="frame" x="-4" y="620" width="383" height="42"/>
+                                <rect key="frame" x="516" y="662" width="43" height="0.0"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="     Next Question  〉"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHm-FD-7Gc">
-                                <rect key="frame" x="-4" y="573" width="383" height="42"/>
+                                <rect key="frame" x="-4" y="615" width="383" height="42"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="〈  Last Question     "/>
@@ -138,7 +138,7 @@
                         <constraints>
                             <constraint firstItem="Kfy-nC-30m" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="2IZ-MG-MaA"/>
                             <constraint firstItem="CHm-FD-7Gc" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" constant="-20" id="4tL-KZ-sjy"/>
-                            <constraint firstItem="CHm-FD-7Gc" firstAttribute="top" secondItem="Kfy-nC-30m" secondAttribute="bottom" constant="10" id="56N-3G-2S8"/>
+                            <constraint firstItem="CHm-FD-7Gc" firstAttribute="top" secondItem="Kfy-nC-30m" secondAttribute="bottom" constant="50" id="56N-3G-2S8"/>
                             <constraint firstItem="CHm-FD-7Gc" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="7Oy-3y-NHD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Gh-Es-Y2x" secondAttribute="trailing" id="CgS-tf-5jP"/>
                             <constraint firstItem="b6l-jW-7lN" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="F3e-Ku-Vvz"/>
@@ -146,8 +146,9 @@
                             <constraint firstItem="8Gh-Es-Y2x" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" id="I3n-C8-NDU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b6l-jW-7lN" secondAttribute="trailing" constant="-20" id="J2L-0W-hrq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kfy-nC-30m" secondAttribute="trailing" id="Pvx-O7-8oc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tlc-vr-yTw" secondAttribute="trailing" constant="-20" id="S0O-BV-7xB"/>
-                            <constraint firstItem="8Gh-Es-Y2x" firstAttribute="top" secondItem="71R-UT-K3w" secondAttribute="bottom" constant="50" id="THc-U2-9sv"/>
+                            <constraint firstItem="Iwe-mF-U1N" firstAttribute="top" secondItem="CHm-FD-7Gc" secondAttribute="bottom" constant="10" id="ROz-3D-vkQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tlc-vr-yTw" secondAttribute="trailing" constant="-200" id="S0O-BV-7xB"/>
+                            <constraint firstItem="8Gh-Es-Y2x" firstAttribute="top" secondItem="71R-UT-K3w" secondAttribute="bottom" constant="30" id="THc-U2-9sv"/>
                             <constraint firstItem="tlc-vr-yTw" firstAttribute="top" secondItem="CHm-FD-7Gc" secondAttribute="bottom" constant="5" id="Z7T-iq-saI"/>
                             <constraint firstItem="b6l-jW-7lN" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" constant="-20" id="ZKi-6N-5cV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CHm-FD-7Gc" secondAttribute="trailing" constant="-20" id="fzv-wK-Hh2"/>
@@ -155,10 +156,15 @@
                             <constraint firstItem="71R-UT-K3w" firstAttribute="top" secondItem="b6l-jW-7lN" secondAttribute="bottom" constant="10" id="nGg-Ys-QaH"/>
                             <constraint firstItem="Iwe-mF-U1N" firstAttribute="top" secondItem="tlc-vr-yTw" secondAttribute="bottom" constant="5" id="rl0-r7-fVg"/>
                             <constraint firstItem="Kfy-nC-30m" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" id="sCM-H7-Xoy"/>
-                            <constraint firstItem="tlc-vr-yTw" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" constant="-20" id="sFH-KY-cyv"/>
+                            <constraint firstItem="tlc-vr-yTw" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" constant="500" id="sFH-KY-cyv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="71R-UT-K3w" secondAttribute="trailing" id="ujb-6F-EUo"/>
                             <constraint firstItem="b6l-jW-7lN" firstAttribute="top" secondItem="xyA-0p-BDk" secondAttribute="bottom" id="xkz-MR-BCm"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lve-Nq-KWK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="instructionsLabel" destination="71R-UT-K3w" id="o0r-vP-9sn"/>

@@ -8,14 +8,15 @@ import UIKit
 import EZSwiftExtensions
 
 public struct Question {
+	var instructions: String?
 	var questionString: String?
-	var answers: [String]?
+	var answers: options
 	var selectedAnswerIndex: Int?
 }
 
-public var questionNumber = 0
+public var questionNumber: Int = 0
 public var questions: [Question] = []
-
+var totalAnswerScore: Int = 0
 
 public class QuestionViewController: UIViewController {
 	
@@ -27,63 +28,97 @@ public class QuestionViewController: UIViewController {
 	@IBOutlet weak var option2Button: UIButton!
 	@IBOutlet weak var option3Button: UIButton!
 	@IBOutlet weak var option4Button: UIButton!
+	
 	@IBAction func option1Button(_ sender: Any) {
+		print(option1Button.titleLabel!.text!)
+		questions[questionNumber].selectedAnswerIndex = 0
+		totalAnswerScore += getPointsForAnswer(answer: option1Button.titleLabel!.text!)
 		nextQuestion()
-		print(option1Button.titleLabel!)
-		questions[questionNumber].selectedAnswerIndex = 1
 	}
+	
 	@IBAction func option2Button(_ sender: Any) {
+		print(option2Button.titleLabel!.text!)
+		questions[questionNumber].selectedAnswerIndex = 1
+		totalAnswerScore += getPointsForAnswer(answer: option2Button.titleLabel!.text!)
 		nextQuestion()
-		print(option2Button.titleLabel!)
-		questions[questionNumber].selectedAnswerIndex = 2
 	}
+	
 	@IBAction func option3Button(_ sender: Any) {
+		print(option3Button.titleLabel!.text!)
+		questions[questionNumber].selectedAnswerIndex = 2
+		totalAnswerScore += getPointsForAnswer(answer: option3Button.titleLabel!.text!)
 		nextQuestion()
-		print(option3Button.titleLabel!)
-		questions[questionNumber].selectedAnswerIndex = 3
 	}
+	
 	@IBAction func option4Button(_ sender: Any) {
+		print(option4Button.titleLabel!.text!)
+		questions[questionNumber].selectedAnswerIndex = 3
+		totalAnswerScore += getPointsForAnswer(answer: option4Button.titleLabel!.text!)
 		nextQuestion()
-		print(option4Button.titleLabel!)
-		questions[questionNumber].selectedAnswerIndex = 4
+	}
+	
+	public func resetVariables(){
+		questionNumber = 0
+		questions = []
+		totalAnswerScore = 0
 	}
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		for i in 0...Scales.GDS().questions.endIndex {
-			questions[i] = Question(questionString: Scales.GDS().questions[i], answers: Scales.GDS().options[i], selectedAnswerIndex: nil)
+		resetVariables()
+		for i in 0..<Scales.GDS().questions.endIndex {
+			questions += [Question(instructions: Scales.GDS().instructions, questionString: Scales.GDS().questions[i], answers: Scales.GDS().scaleAnswers[i], selectedAnswerIndex: nil)]
 		}
 		updateQuestion()
 	}
 	
 	public func nextQuestion() {
-		if questionNumber == Scales.GDS().questions.endIndex-1 {
+		if questionNumber == questions.endIndex-1 {
 			print("done")
 			testProgress.progressTintColor = UIColor.init(hexString: "#00C853")
-			//			let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
 			self.dismissVC(completion: {
-				print("dismiss")
+				print("Results: ")
+				for i in 0..<questions.endIndex {
+					print("\(questions[i].questionString!)\t \(questions[i].answers.options[questions[i].selectedAnswerIndex!])")
+				}
+				print("Total Score: \(totalAnswerScore)/\(questions.count)")
 			})
 			questionNumber = 0
-		} else if questionNumber == Scales.GDS().questions.endIndex {
-		} else {
+		} else if questionNumber == questions.endIndex {}
+		else {
 			questionNumber+=1
 			updateQuestion()
 		}
 	}
 	
+	public func lastQuestion() {
+		if questionNumber != 0 {
+			
+		}
+	}
+	
 	public func updateQuestion() {
+		print(totalAnswerScore)
 		var options = [option1Button, option2Button, option3Button, option4Button]
-		instructionsLabel.text! = Scales.GDS().instructions
+		instructionsLabel.text! = questions[questionNumber].instructions!
 		instructionsLabel.sizeToFit()
-		questionLabel.text = Scales.GDS().questions[questionNumber]
+		questionLabel.text = questions[questionNumber].questionString
 		questionLabel.sizeToFit()
-		for i in Scales.GDS().options[questionNumber].endIndex..<4 {
+		//		print(questions[1].answers.options?.endIndex)
+		for i in questions.get(at: questionNumber)!.answers.options.endIndex..<4 {
 			options[i]!.isHidden = true
 		}
-		for i in 0..<Scales.GDS().options[questionNumber].count {
-			options[i]!.setTitle(Scales.GDS().options[questionNumber][i], for: .normal)
+		for i in 0..<questions.get(at: questionNumber)!.answers.options.count {
+			options[i]!.setTitle(questions[questionNumber].answers.options[i], for: .normal)
 		}
-		testProgress.setProgress(Float(questionNumber)/Float(Scales.GDS().questions.endIndex-1), animated: true)
+		testProgress.setProgress(Float(questionNumber)/Float(questions.endIndex-1), animated: true)
+	}
+	
+	public func getPointsForAnswer(answer:String!) -> Int {
+		if (questions[questionNumber].answers.options?.contains(answer))! {
+			return (questions[questionNumber].answers.points?[(questions[questionNumber].answers.options?.index(of: answer))!])!
+		} else {
+			return 0
+		}
 	}
 }
