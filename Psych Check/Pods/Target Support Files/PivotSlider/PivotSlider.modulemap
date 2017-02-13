@@ -1,6 +1,0 @@
-framework module PivotSlider {
-  umbrella header "PivotSlider-umbrella.h"
-
-  export *
-  module * { export * }
-}

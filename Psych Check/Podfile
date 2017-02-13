@@ -1,9 +1,9 @@
 project 'Psych Check.xcodeproj'
 use_frameworks!
 target 'Psych Check' do
-  pod 'Firebase/Core'
+#  pod 'Firebase/Core'
   pod 'EZSwiftExtensions'
-  pod 'PivotSlider'
+#   pod 'PivotSlider'
   pod 'RevealingSplashView'
   pod 'AlertOnboarding'
 end
