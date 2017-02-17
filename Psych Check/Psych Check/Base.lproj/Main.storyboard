@@ -84,35 +84,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kfy-nC-30m">
-                                <rect key="frame" x="16" y="325" width="343" height="240"/>
+                                <rect key="frame" x="16" y="373" width="343" height="192"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ES-2ev">
-                                        <rect key="frame" x="98" y="0.0" width="147" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ES-2ev">
+                                        <rect key="frame" x="116" y="0.0" width="111" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 1"/>
                                         <connections>
                                             <action selector="option1Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="jRw-bF-nnu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="9Qf-Ue-bao">
-                                        <rect key="frame" x="95.5" y="60" width="152" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9Qf-Ue-bao">
+                                        <rect key="frame" x="114" y="48" width="115" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 2"/>
                                         <connections>
                                             <action selector="option2Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="LsR-Rg-J0a"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Umt-Gf-HbL">
-                                        <rect key="frame" x="95" y="120" width="153" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Umt-Gf-HbL">
+                                        <rect key="frame" x="113.5" y="96" width="116" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 3"/>
                                         <connections>
                                             <action selector="option3Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="RCP-du-ctf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-0q-Im8">
-                                        <rect key="frame" x="94.5" y="180" width="154" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-0q-Im8">
+                                        <rect key="frame" x="113.5" y="144" width="116" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 4"/>
                                         <connections>
                                             <action selector="option4Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="CFG-W3-BVK"/>
