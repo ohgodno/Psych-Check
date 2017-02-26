@@ -1,9 +1,12 @@
 project 'Psych Check.xcodeproj'
 use_frameworks!
 target 'Psych Check' do
-#  pod 'Firebase/Core'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'TKSubmitTransitionSwift3'
+#  pod 'BorderedButton'
   pod 'EZSwiftExtensions'
-#   pod 'PivotSlider'
   pod 'RevealingSplashView'
-  pod 'AlertOnboarding'
+  pod 'AnimatedTextInput'
 end

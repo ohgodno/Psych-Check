@@ -5,22 +5,26 @@
 
 import UIKit
 import Foundation
-import AlertOnboarding
 import EZSwiftExtensions
+import Firebase
+import GoogleSignIn
+import AnimatedTextInput
 
-public class ViewController: UIViewController, AlertOnboardingDelegate {
+var defaults: UserDefaults = UserDefaults()
+var defaultsUser: UserDefaults = UserDefaults()
 
-	var defaults: UserDefaults=UserDefaults()
-	var onboardingAlertView: AlertOnboarding!
-	let tutorialImages = ["PsychCheckSmile","PsychCheckSmile"]
-	let tutorialTitles = ["Welcome to Psych Check", "look at this gay ass icon"]
-	let tutorialDescriptions = ["kill yourself", "still kill urself"]
-	
+public class ViewController: UIViewController {
+
 	@IBOutlet weak var startTestButton: UIButton!
-	
 	
 	@IBAction func startTestButton(_ sender: Any) {
 		print(getTest())
+	}
+	
+	@IBAction func signOutButton(_ sender: Any) {
+		GIDSignIn.sharedInstance().signOut()
+		let NC = self.storyboard!.instantiateViewController(withIdentifier: "NavigationController")
+		UIApplication.shared.keyWindow?.rootViewController = NC
 	}
 	
 	override public func viewDidLoad() {
@@ -28,40 +32,22 @@ public class ViewController: UIViewController, AlertOnboardingDelegate {
 		
 	}
 	
+
+	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		onboardingAlertView = AlertOnboarding(arrayOfImage: tutorialImages, arrayOfTitle: tutorialTitles, arrayOfDescription: tutorialDescriptions)
-		onboardingAlertView.delegate = self
 		defaults.set(true, forKey: "firstOpen")
 		if defaults.bool(forKey: "firstOpen") {
-			onboard()
 			print("yes")
 		}
 	}
 
-	public func onboard() {
-		onboardingAlertView.percentageRatioHeight = 0.9
-		onboardingAlertView.percentageRatioWidth = 0.9
-		onboardingAlertView.titleSkipButton = "Skip"
-		onboardingAlertView.titleGotItButton = "I will"
-//		onboardingAlertView.show()
-	}
-	
 	public func getTest() -> String {
 		return Scales.GDS().instructions
 	}
 
 	override public func didReceiveMemoryWarning() {	super.didReceiveMemoryWarning()	}
-
-	public func alertOnboardingSkipped(_ currentStep: Int, maxStep: Int) {
-		print("Onboarding skipped the \(currentStep) step and the max step he saw was the number \(maxStep)")
-	}
-	
-	public func alertOnboardingCompleted() {
-		print("Onboarding completed!")
-	}
-	
-	public func alertOnboardingNext(_ nextStep: Int) {
-		print("Next step triggered! \(nextStep)")
-	}
 }
+
+
+

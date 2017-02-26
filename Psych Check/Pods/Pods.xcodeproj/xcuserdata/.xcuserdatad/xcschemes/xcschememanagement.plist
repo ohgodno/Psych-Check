@@ -4,17 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AlertOnboarding-AlertOnboardingXib.xcscheme</key>
+		<key>AnimatedTextInput-AnimatedTextInput.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>AlertOnboarding.xcscheme</key>
+		<key>AnimatedTextInput.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BorderedButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>EZSwiftExtensions.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -25,6 +45,11 @@
 			<false/>
 		</dict>
 		<key>RevealingSplashView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TKSubmitTransitionSwift3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

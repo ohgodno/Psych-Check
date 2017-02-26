@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="14O-zI-ubL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,6 +34,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3P-5A-N6e">
+                                <rect key="frame" x="125" y="129" width="124" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="sign urself out m8"/>
+                                <connections>
+                                    <action selector="signOutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xla-t5-ZeT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -41,12 +49,164 @@
                             <constraint firstItem="wS0-QC-H0r" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yc2-di-mVE"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="startTestButton" destination="dXk-nf-le8" id="AUz-dt-8zB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-887" y="1869"/>
+        </scene>
+        <!--PickSignInViewController-->
+        <scene sceneID="j5R-eD-Dp4">
+            <objects>
+                <viewController storyboardIdentifier="PickSignInViewController" title="Sign In" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oX5-PP-NyZ" userLabel="PickSignInViewController" customClass="PickSignInViewController" customModule="Psych_Check" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZSl-YT-NIC"/>
+                        <viewControllerLayoutGuide type="bottom" id="L2D-GB-B3g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MDI-86-Vdg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aLa-ld-lVs">
+                                <rect key="frame" x="16" y="415" width="343" height="152"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbq-Jj-mik" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="38"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="Email/Password">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                                <color key="value" red="0.92201063370000003" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="0.5" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="emailPasswordSignInButton:" destination="oX5-PP-NyZ" eventType="touchUpInside" id="g6e-rD-n0h"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5e-Z8-E36" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
+                                        <rect key="frame" x="0.0" y="38" width="343" height="38"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="Google">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                                <color key="value" red="0.92201063370000003" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                <color key="value" red="0.25882352941176467" green="0.52156862745098043" blue="0.95686274509803915" alpha="0.75" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                <color key="value" red="0.25882352941176467" green="0.52156862745098043" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="googleSignInButton:" destination="oX5-PP-NyZ" eventType="touchUpInside" id="Juh-6X-XrV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="88T-Nx-fU0" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
+                                        <rect key="frame" x="0.0" y="76" width="343" height="38"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="Twitter">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                <color key="value" red="0.11372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="0.94999999999999996" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                                <color key="value" red="0.92201063370000003" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                <color key="value" red="0.11372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="twitterSignInButton:" destination="oX5-PP-NyZ" eventType="touchUpInside" id="wyK-C6-397"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-4R-RJV" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
+                                        <rect key="frame" x="0.0" y="114" width="343" height="38"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" title="Facebook">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedBackgroundColor">
+                                                <color key="value" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="0.75" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                                <color key="value" red="0.92201063370000003" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="normalBackgroundColor">
+                                                <color key="value" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="facebookSignInButton:" destination="oX5-PP-NyZ" eventType="touchUpInside" id="v8e-rL-Fln"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="88T-Nx-fU0" firstAttribute="leading" secondItem="aLa-ld-lVs" secondAttribute="leading" id="3Jh-PR-EVe"/>
+                                    <constraint firstAttribute="trailing" secondItem="PBr-4R-RJV" secondAttribute="trailing" id="5Lf-48-2HT"/>
+                                    <constraint firstAttribute="trailing" secondItem="l5e-Z8-E36" secondAttribute="trailing" id="Hgc-6w-0vc"/>
+                                    <constraint firstAttribute="trailing" secondItem="88T-Nx-fU0" secondAttribute="trailing" id="MVj-SN-CJD"/>
+                                    <constraint firstItem="l5e-Z8-E36" firstAttribute="leading" secondItem="aLa-ld-lVs" secondAttribute="leading" id="ZXv-Bu-XKd"/>
+                                    <constraint firstItem="PBr-4R-RJV" firstAttribute="leading" secondItem="aLa-ld-lVs" secondAttribute="leading" id="iBB-YA-SN6"/>
+                                    <constraint firstItem="bbq-Jj-mik" firstAttribute="leading" secondItem="aLa-ld-lVs" secondAttribute="leading" id="vM3-4Y-wUv"/>
+                                    <constraint firstAttribute="trailing" secondItem="bbq-Jj-mik" secondAttribute="trailing" id="ywV-jl-bnm"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="L2D-GB-B3g" firstAttribute="top" secondItem="aLa-ld-lVs" secondAttribute="bottom" constant="100" id="Neq-4K-g86"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aLa-ld-lVs" secondAttribute="trailing" id="OU8-Uc-e2R"/>
+                            <constraint firstItem="aLa-ld-lVs" firstAttribute="leading" secondItem="MDI-86-Vdg" secondAttribute="leadingMargin" id="pUJ-T6-Jd5"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="emailPasswordSignInButton" destination="bbq-Jj-mik" id="JZu-3j-9XG"/>
+                        <outlet property="facebookSignInButton" destination="PBr-4R-RJV" id="ufY-Di-A1y"/>
+                        <outlet property="googleSignInButton" destination="l5e-Z8-E36" id="M4M-vO-tsD"/>
+                        <outlet property="twitterSignInButton" destination="88T-Nx-fU0" id="RIb-UX-4Z9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K7x-Lv-Sab" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-887" y="1188"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="A8x-rh-azI">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationController" title="Navigation Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="14O-zI-ubL" customClass="NavigationController" customModule="Psych_Check" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1yn-VJ-age">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="NCtoVC" id="Guo-Oo-wbq"/>
+                        <segue destination="oX5-PP-NyZ" kind="show" id="kQZ-f9-BX1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SoB-8C-oer" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1730" y="1518"/>
         </scene>
         <!--Question View Controller-->
         <scene sceneID="OoK-DB-nRS">
@@ -61,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="b6l-jW-7lN">
-                                <rect key="frame" x="-4" y="20" width="383" height="2.5"/>
+                                <rect key="frame" x="-4" y="20" width="383" height="3"/>
                                 <color key="progressTintColor" red="0.16078431372549018" green="0.38431372549019605" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
@@ -103,7 +263,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Umt-Gf-HbL">
-                                        <rect key="frame" x="113.5" y="96" width="116" height="48"/>
+                                        <rect key="frame" x="114" y="96" width="116" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 3"/>
                                         <connections>
@@ -111,7 +271,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-0q-Im8">
-                                        <rect key="frame" x="113.5" y="144" width="116" height="48"/>
+                                        <rect key="frame" x="114" y="144" width="116" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 4"/>
                                         <connections>
@@ -166,6 +326,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="instructionsLabel" destination="71R-UT-K3w" id="o0r-vP-9sn"/>
                         <outlet property="option1Button" destination="BaV-ES-2ev" id="Pkl-hC-2nx"/>
@@ -179,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ip-ux-8eb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048.8" y="118.29085457271366"/>
+            <point key="canvasLocation" x="-68" y="1867"/>
         </scene>
     </scenes>
 </document>
