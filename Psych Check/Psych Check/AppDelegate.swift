@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		return true
 	}
 	
+	
 	@available(iOS 9.0, *)
 	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
 		return GIDSignIn.sharedInstance().handle(url,
@@ -42,8 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		if let error = error {
 			print("\(error.localizedDescription)")
 			NotificationCenter.default.post(
-				name: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, userInfo: nil)
+				name: Notification.Name(rawValue: "AuthUINotification"), object: nil, userInfo: nil)
 		} else {
+			print("🎉🎉🎉 Connected 🎉🎉🎉")
 			// Perform any operations on signed in user here.
 //			let userId = user.userID                  // For client-side use only!
 //			let idToken = user.authentication.idToken // Safe to send to the server
@@ -58,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 			                  "familyName":user.profile.familyName,
 			                  "email":user.profile.email], forKey: "userDict")
 			NotificationCenter.default.post(
-				name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+				name: Notification.Name(rawValue: "AuthUINotification"),
 				object: nil,
 				userInfo: ["statusText": "Signed in user:\n\(fullName!)"])
 		}
@@ -66,48 +68,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	
 	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
 	          withError error: Error!) {
+		print("🔴🔴🔴 Disconnected 🔴🔴🔴")
 		// Perform any operations when the user disconnects from app here.
 		// [START_EXCLUDE]
 		NotificationCenter.default.post(
-			name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+			name: Notification.Name(rawValue: "AuthUINotification"),
 			object: nil,
 			userInfo: ["statusText": "User has disconnected."])
 		// [END_EXCLUDE]
 	}
-	
-	
-	
-//	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-//
-//  if let error = error { return }
-//		
-//  guard let authentication = user.authentication else { return }
-//  let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-//  FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-//		if let error = error { return }
-//		}
-//	}
-//	
-//	func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
-//	            withError error: NSError!) {
-//		if (error == nil) {
-//			// Perform any operations on signed in user here.
-//			//			let userId = user.userID										// For client-side use only!
-//			//			let idToken = user.authentication.idToken		// Safe to send to the server
-//			//			let fullName = user.profile.name
-//			//			let givenName = user.profile.givenName
-//			//			let familyName = user.profile.familyName
-//			//			let email = user.profile.email
-//			print("User ID: \(user.userID)")
-//			print("ID Token: \(user.authentication.idToken)")
-//			print("Full Name: \(user.profile.name)")
-//			print("Given Name: \(user.profile.givenName)")
-//			print("Family Name: \(user.profile.familyName)")
-//			print("Email: \(user.profile.email)")
-//		} else {
-//			print("\(error.localizedDescription)")
-//		}
-//	}
 	
 	
 	func applicationWillResignActive(_ application: UIApplication) {

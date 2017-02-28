@@ -1,5 +1,5 @@
 //
-//  NavigationController.swift
+//  navigationController.swift
 //  Psych Check
 //
 //  Created by Harr on 2/25/17.
@@ -11,19 +11,18 @@ import Foundation
 import Firebase
 import GoogleSignIn
 
-class NavigationController : UINavigationController {
+class navigationController : UINavigationController {
 	
 	@IBAction func unwindtoNC(segue: UIStoryboardSegue) {	}
-
-	let authVC = AuthViewController(nibName: "AuthViewController", bundle: nil)
+	
+//	let authVC = AuthViewController(nibName: "AuthViewController", bundle: nil)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+		if FIRAuth.auth()?.currentUser != nil {
 			self.pushViewController((self.storyboard?.instantiateViewController(withIdentifier: "ViewController"))!, animated: true)
 		} else {
 			self.pushViewController((self.storyboard?.instantiateViewController(withIdentifier: "PickSignInViewController"))!, animated: true)
-			//			self.pushVC(PickSignInViewController())
 		}
 	}
 	
@@ -50,4 +49,14 @@ class NavigationController : UINavigationController {
 		}
 	}
 }
-    
+
+extension UIViewController {
+	func performSegueToReturnBack()  {
+		if let nav = self.navigationController {
+			nav.popViewController(animated: true)
+		} else {
+			self.dismiss(animated: true, completion: nil)
+		}
+	}
+}
+

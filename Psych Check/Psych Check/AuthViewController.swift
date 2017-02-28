@@ -29,20 +29,13 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 	@IBOutlet var textInputs: [AnimatedTextInput]!
 	@IBOutlet var submitButton: UIButton!
 	@IBAction func submitButton(_ sender: Any) {
+		FIRAuth.auth()?.signIn(withEmail: textInputs[0].text!, password: textInputs[1].text!) { (user, error) in
+			print("🎉🎉🎉 SIGNED IN 🎉🎉🎉")
+		}
 	}
-	
-	
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		if selectedSignIn.name == "Google" {
-			GIDSignIn.sharedInstance().uiDelegate = self
-			
-			NotificationCenter.default.addObserver(self,
-			                                       selector: #selector(AuthViewController.receiveToggleAuthUINotification(_:)),
-			                                       name: NSNotification.Name(rawValue: "ToggleAuthUINotification"),
-			                                       object: nil)
-		}
 		print(selectedSignIn.name)
 		if selectedSignIn.name == "Email/Password" {
 			textInputs?[0].placeHolderText = "Email"
@@ -53,6 +46,12 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 			textInputs?[1].style = MaterialTextInputStyle()
 			statusLabel.isHidden = true
 		} else if selectedSignIn.name == "Google" {
+			GIDSignIn.sharedInstance().uiDelegate = self
+			
+			NotificationCenter.default.addObserver(self,
+			                                       selector: #selector(AuthViewController.receiveToggleAuthUINotification(_:)),
+			                                       name: NSNotification.Name(rawValue: "ToggleAuthUINotification"),
+			                                       object: nil)
 			statusLabel.isHidden = false
 			signInStackView.isHidden = true
 			toggleAuthUI()
@@ -63,7 +62,9 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 	
 	public override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		GIDSignIn.sharedInstance().signIn()
+		if selectedSignIn.name == "Google" {
+			GIDSignIn.sharedInstance().signIn()
+		}
 	}
 	
 	func toggleAuthUI() {
@@ -95,7 +96,7 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 				print((defaultsUser.object(forKey: "userDict") as! Dictionary)["email"]!)
 				shouldDismissPickVC = true
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let nc = storyboard.instantiateViewController(withIdentifier: "NavigationController") as! NavigationController
+				let nc = storyboard.instantiateViewController(withIdentifier: "navigationController") as! navigationController
 				self.present(nc, animated: false, completion: nil)
 			}
 		}
@@ -103,22 +104,7 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 	
 }
 
-public struct MaterialTextInputStyle: AnimatedTextInputStyle {
-	public var activeColor: UIColor = UIColor(hexString: "#2196F3")!
-	public var inactiveColor: UIColor = UIColor.black.withAlphaComponent(0.38)
-	public var lineInactiveColor: UIColor = UIColor.black.withAlphaComponent(0.38)
-	public var errorColor: UIColor = UIColor(hexString: "#F44336")!
-	public var textInputFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-	public var textInputFontColor: UIColor = UIColor.black
-	public var placeholderMinFontSize: CGFloat = 10
-	public var counterLabelFont: UIFont? = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-	public let leftMargin: CGFloat = 25
-	public let topMargin: CGFloat = 20
-	public let rightMargin: CGFloat = 0
-	public let bottomMargin: CGFloat = 10
-	public let yHintPositionOffset: CGFloat = 7
-	public let yPlaceholderPositionOffset: CGFloat = 0
-}
+
 
 public func toggleAuthUI() -> Bool {
 	defaultsUser.set(GIDSignIn.sharedInstance().hasAuthInKeychain(), forKey: "isSignedIn")

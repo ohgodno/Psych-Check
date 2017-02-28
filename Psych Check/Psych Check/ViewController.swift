@@ -19,11 +19,14 @@ public class ViewController: UIViewController {
 	
 	@IBAction func startTestButton(_ sender: Any) {
 		print(getTest())
+		let QVC = self.storyboard!.instantiateViewController(withIdentifier: "QuestionViewController")
+		present(QVC, animated: true, completion: nil)
 	}
 	
 	@IBAction func signOutButton(_ sender: Any) {
-		GIDSignIn.sharedInstance().signOut()
-		let NC = self.storyboard!.instantiateViewController(withIdentifier: "NavigationController")
+		try! FIRAuth.auth()!.signOut()
+		
+		let NC = self.storyboard!.instantiateViewController(withIdentifier: "navigationController")
 		UIApplication.shared.keyWindow?.rootViewController = NC
 	}
 	
@@ -31,8 +34,6 @@ public class ViewController: UIViewController {
 		super.viewDidLoad()
 		
 	}
-	
-
 	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)

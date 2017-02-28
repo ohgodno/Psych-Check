@@ -5,6 +5,8 @@
 
 import Foundation
 
+public var disclaimer: String! = "This is NOT a diagnosis. Contact your doctor if you have any symptoms of depression."
+
 public struct Question {
 	var questionString: String!
 	var options: [String]!
@@ -13,12 +15,24 @@ public struct Question {
 	var selectedAnswer: Int!
 }
 
+public protocol scalesFormat {
+	var totalScore: Int { get set }
+	var instructions: String! { get set }
+	var questions: [Question] { get set }
+	var resultsInformation: String! { get set }
+	func getResultInformation() -> String!
+	
+}
+
 public class Scales {
 	
 	// Geriatric Depression Scale
-	public struct GDS {
+	public class GDS: scalesFormat {
+		
 		public var totalScore = 0
-		public var instructions = "Choose the best answer for how you have felt over the past week"
+		
+		public var instructions: String! = "Choose the best answer for how you have felt over the past week"
+		
 		public var questions: [Question] = [Question(questionString: "Are you basically satisfied with your life?",
 		                                             options: ["Yes", "No"],
 		                                             points: [0,1],
@@ -94,21 +108,22 @@ public class Scales {
 		                                             points: [1,0],
 		                                             selectedAnswerString: "",
 		                                             selectedAnswer: 0)]
-		public var resultsInformation: String! = "A score of 0 to 5 is normal. A score greater than 5 suggests depression. This is NOT a diagnosis. Contact your doctor if you have any symptoms of depression."
 		
-		public func diagnosis() -> String! {
-			if totalScore >= 5 {
-				return "You may have depression"
-			} else {
-				return "You should be fine"
-			}
+		public var resultsInformation: String! = "A score of 0 to 5 is normal. A score greater than 5 suggests depression. \(disclaimer!)"
+		
+		public func getResultInformation() -> String! {
+			return totalScore >= 5 ?
+				"Your score of \(totalScore) suggests depression. \(disclaimer!)" :
+			"Your score of \(totalScore) is less than 5 and suggests that you are fine. \(disclaimer!)."
 		}
 	}
 	
 	// Patient Health Questionnaire
-	public struct PHQ9 {
-		var totalScore = 0
-		public var instructions = "Over the past 2 weeks, how often have you been bothered by any of the following problems?"
+	public struct PHQ9: scalesFormat {
+		
+		public var totalScore = 0
+		
+		public var instructions: String! = "Over the past 2 weeks, how often have you been bothered by any of the following problems?"
 		
 		public var questions: [Question] = [Question(questionString: "Little interest or pleasure in doing things",
 		                                             options: ["Not At all", "Several Days", "More Than Half the Days", "Nearly Every Day"],
@@ -155,13 +170,31 @@ public class Scales {
 		                                             points: [0,1,2,3],
 		                                             selectedAnswerString: "",
 		                                             selectedAnswer: 0)]
-	
+		public var resultsInformation: String! =
+			["A score ranging from 5-9 suggests minimal symptoms. It is recommended that the patient should be educated to call if worse, and return in one month",
+			 "A score ranging from 10-14 suggests Minor Depression, Dysthymia, and/or Major Depression (mild). It is recommended that the patient have support and/or Antidepressant or psychotherapy if necessary",
+			 "A score ranging from 15-19 suggests Major Depression (moderately severe). It is recommended that the patient receive antidepressants or psychotherapy",
+			 "A score greater than 20 suggests Major Depression (severe). It is recommended that the patient receive antidepressants or psychotherapy"].joined(separator: "\n")
+		
+		public func getResultInformation() -> String! {
+			if (5...9).contains(totalScore) {
+				return "Your score of \(totalScore) suggests minimal symptoms. It is recommended that the patient should be educated to call if worse, and return in one month. \(disclaimer!)"
+			} else if (10...14).contains(totalScore) {
+				return "Your score of \(totalScore) suggests Minor Depression, Dysthymia, and/or Major Depression (mild). It is recommended that you get support and/or Antidepressants or psychotherapy. Contact your doctor to find out about possible treatment. \(disclaimer!)"
+			} else if (15...19).contains(totalScore) {
+				return "Your score of \(totalScore) suggests Major Depression (moderately severe). It is recommended that you receive antidepressants or psychotherapy. Contact your doctor to find out about possible treatment. \(disclaimer!)"
+			} else if totalScore >= 20 {
+				return "Your score of \(totalScore) suggests suggests Major Depression (severe). It is recommended that you receive antidepressants or psychotherapy. Contact your doctor to find out about possible treatment. \(disclaimer!)"
+			} else {
+				return "Your score of \(totalScore) is less than 5 and suggests that you are fine. \(disclaimer!)"
+			}
+		}
 	}
 }
 
-public class results {
+public class Results {
 	public var depressionScale: String!
 	public var answersGiven: [String:Any] = [:]
 	public var totalScore: Int = 0
-	public var problemScore: Int = 0
+	public var resultsInformation: String!
 }
