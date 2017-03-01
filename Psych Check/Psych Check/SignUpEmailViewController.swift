@@ -55,7 +55,7 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 					alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: {(action) in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				case .errorCodeEmailAlreadyInUse:
-					let alert = UIAlertController(title: "Account exists", message: "The email address \(email) already exists. Either login with the password for that address or click the help button if you have forgotten your password", preferredStyle: .alert)
+					let alert = UIAlertController(title: "Account exists", message: "An account with the email adress \(email) already exists. Either login with the password for that address or click the help button if you have forgotten your password", preferredStyle: .alert)
 					alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: {(action) in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				case .errorCodeInvalidEmail:
@@ -63,8 +63,8 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 					alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: {(action) -> Void in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				default:
-					let alert = UIAlertController(title: "Something is Fucked Up", message: "Here is the message from Firebase: \(error.localizedDescription)", preferredStyle: .alert)
-					alert.addAction(UIAlertAction(title: "Okay, G", style: .default, handler: {(action) -> Void in }))
+					let alert = UIAlertController(title: "Error", message: "Here is the message from Firebase: \(error.localizedDescription)", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Whoops", style: .default, handler: {(action) -> Void in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				}
 				

@@ -44,7 +44,10 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	@IBAction func googleSignInButton(_ sender: Any) {
 		selectedSignIn.name = "Google"
 		selectedSignIn.color = UIColor(hexString: "#4285F4")
-		signInButtonPressed(googleSignInButton)
+		GIDSignIn.sharedInstance().uiDelegate = self
+		googleSignInButton.animate(1, completion: {
+			GIDSignIn.sharedInstance().signIn()
+		})
 	}
 	
 	@IBAction func twitterSignInButton(_ sender: Any) {
@@ -62,28 +65,24 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	
 	public func signInButtonPressed(_ button: TKTransitionSubmitButton) {
 		button.superview?.bringSubview(toFront: button)
-		button.animate(1, completion: { () -> () in
+		button.animate(0.5, completion: { () -> () in
 			if button == self.emailPasswordSignInButton {
-				let authVC = SignInEmailViewController(nibName: "Authentication", bundle: nil)
+				let authVC = UIStoryboard(name: "Authentication", bundle: nil).instantiateViewController(withIdentifier: "SignInEmailViewController")
 				authVC.transitioningDelegate = self
+				self.present(authVC, animated: true, completion: nil)
 			} else if button == self.googleSignInButton {
-				GIDSignIn.sharedInstance().uiDelegate = self
 				GIDSignIn.sharedInstance().signIn()
 			}
 		})
-		if button == self.emailPasswordSignInButton {
-			self.performSegue(withIdentifier: "showAuthSignIn", sender: self)
-		}
+//		if button == self.emailPasswordSignInButton {
+//			self.performSegue(withIdentifier: "showAuthSignIn", sender: self)
+//		}
 	}
 	
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		if FIRAuth.auth()?.currentUser != nil {
-			print("should dismiss")
-			let NC = self.storyboard?.instantiateViewController(withIdentifier: "navigationController")
-			self.present(NC!, animated: true, completion: nil)
-		}
+		
 		for button in [emailPasswordSignInButton, googleSignInButton, twitterSignInButton, facebookSignInButton] {
 			button!.normalCornerRadius = min(emailPasswordSignInButton.frame.width / 2 , emailPasswordSignInButton.frame.height / 2)
 		}
@@ -91,11 +90,8 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		if FIRAuth.auth()?.currentUser != nil {
-			print("should dismiss")
-			let NC = self.storyboard?.instantiateViewController(withIdentifier: "navigationController")
-			self.present(NC!, animated: true, completion: nil)
-		}
+		GIDSignIn.sharedInstance().uiDelegate = self
+		checkAndDismiss(sender: "viewDidAppear")
 		
 		NotificationCenter.default.addObserver(self,
 		                                       selector: #selector(PickSignInViewController.receiveAuthUINotification(_:)),
@@ -104,16 +100,24 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	}
 	
 	
-	
-	override public func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
+	public func checkAndDismiss(sender:String? = nil) {
+		if FIRAuth.auth()?.currentUser != nil {
+			print("✅✅✅ USER SIGNED IN ✅✅✅ (\(sender ?? ""))")
+			let NC = self.storyboard?.instantiateViewController(withIdentifier: "navigationController")
+			self.present(NC!, animated: true, completion: nil)
+		} else {
+			print("❎❎❎ USER NOT SIGNED IN ❎❎❎ (\(sender ?? ""))")
+		}
 	}
 	
 	public func receiveAuthUINotification(_ notification: NSNotification) {
 		if notification.name.rawValue == "AuthUINotification" {
 			if notification.userInfo != nil {
 				guard let userInfo = notification.userInfo as? [String:String] else { return }
-				print(userInfo["statusText"]!)
+				print(userInfo["statusText"]! + "receiveAuthUINotification")
+				googleSignInButton.startFinishAnimation(0, completion: {
+					self.checkAndDismiss(sender: "receiveAuthUINotification")
+				})
 			}
 		}
 	}
@@ -123,6 +127,36 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 		                                          name: NSNotification.Name(rawValue: "AuthUINotification"),
 		                                          object: nil)
 	}
+	
+	public func firebaseLogin(_ credential: FIRAuthCredential) {
+		if let user = FIRAuth.auth()?.currentUser {
+			user.link(with: credential) { (user, error) in
+				print("🔗🔗🔗 LINKED 🔗🔗🔗")
+				if let error = error {
+					self.showMessagePrompt(error.localizedDescription)
+					return
+				}
+				self.checkAndDismiss(sender: "firebaseLogin/linked")
+			}
+		} else {
+			FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+				print("✅✅✅ firebaseLogin SIGNED IN ✅✅✅")
+				if let error = error {
+					self.showMessagePrompt(error.localizedDescription)
+					return
+				}
+				self.checkAndDismiss(sender: "firebaseLogin/signIn")
+			}
+		}
+	}
+	
+	func showMessagePrompt(_ message: String) {
+		let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+		alert.addAction(okAction)
+		self.present(alert, animated: true, completion: { _ in })
+	}
+	
 	
 	public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 		return TKFadeInAnimator(transitionDuration: 0.5, startingAlpha: 0.8)

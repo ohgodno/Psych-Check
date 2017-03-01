@@ -19,7 +19,7 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 	
 	@IBAction func cancelButton(_ sender: UIButton) {
 		self.dismiss(animated: true, completion: {
-			print("❌❌❌ Cancelled ❌❌❌")
+			print("❌❌❌ CANCELLED ❌❌❌")
 		})
 	}
 	
@@ -72,11 +72,9 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 			// Signed in
 			statusLabel.text = "🎉🎉🎉 SIGNED IN 🎉🎉🎉"
 			print("🎉🎉🎉 SIGNED IN 🎉🎉🎉")
-			defaultsUser.set(true, forKey: "isSignedIn")
 		} else {
 			statusLabel.text = "😢😢😢 NOT SIGNED IN 😢😢😢"
 			print("😢😢😢 NOT SIGNED IN 😢😢😢")
-			defaultsUser.set(false, forKey: "isSignedIn")
 		}
 	}
 	
@@ -93,7 +91,6 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 				guard let userInfo = notification.userInfo as? [String:String] else { return }
 				statusLabel.text = String!(userInfo["statusText"]!)
 				print("Status Text: \(notification)")
-				print((defaultsUser.object(forKey: "userDict") as! Dictionary)["email"]!)
 				shouldDismissPickVC = true
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let nc = storyboard.instantiateViewController(withIdentifier: "navigationController") as! navigationController
@@ -107,6 +104,5 @@ public class AuthViewController: UIViewController, GIDSignInUIDelegate {
 
 
 public func toggleAuthUI() -> Bool {
-	defaultsUser.set(GIDSignIn.sharedInstance().hasAuthInKeychain(), forKey: "isSignedIn")
 	return GIDSignIn.sharedInstance().hasAuthInKeychain()
 }

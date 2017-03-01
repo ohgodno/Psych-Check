@@ -48,7 +48,7 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 					alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: {(action) -> Void in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				default:
-					let alert = UIAlertController(title: "Something is Fucked Up", message: "Here is the message from Firebase: \(error.localizedDescription)", preferredStyle: .alert)
+					let alert = UIAlertController(title: "Error", message: "Here is the message from Firebase: \(error.localizedDescription)", preferredStyle: .alert)
 					alert.addAction(UIAlertAction(title: "Okay, G", style: .default, handler: {(action) -> Void in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				}

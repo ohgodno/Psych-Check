@@ -10,8 +10,6 @@ import Firebase
 import GoogleSignIn
 import AnimatedTextInput
 
-var defaults: UserDefaults = UserDefaults()
-var defaultsUser: UserDefaults = UserDefaults()
 
 public class ViewController: UIViewController {
 
@@ -24,8 +22,13 @@ public class ViewController: UIViewController {
 	}
 	
 	@IBAction func signOutButton(_ sender: Any) {
-		try! FIRAuth.auth()!.signOut()
-		
+		GIDSignIn.sharedInstance().signOut()
+
+		do {
+			try FIRAuth.auth()?.signOut()
+		} catch let signOutError as NSError {
+			print ("Error signing out: %@", signOutError)
+		}
 		let NC = self.storyboard!.instantiateViewController(withIdentifier: "navigationController")
 		UIApplication.shared.keyWindow?.rootViewController = NC
 	}
@@ -37,10 +40,6 @@ public class ViewController: UIViewController {
 	
 	override public func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		defaults.set(true, forKey: "firstOpen")
-		if defaults.bool(forKey: "firstOpen") {
-			print("yes")
-		}
 	}
 
 	public func getTest() -> String {

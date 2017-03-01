@@ -40,35 +40,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
 	          withError error: Error!) {
+		guard let controller = GIDSignIn.sharedInstance().uiDelegate as? PickSignInViewController else { return }
+
 		if let error = error {
-			print("\(error.localizedDescription)")
+			print("\(error.localizedDescription) (AppDelegate/didSignInFor)")
+			if error.localizedDescription == "The user canceled the sign-in flow." {
+				controller.googleSignInButton.setOriginalState()
+			}
+
 			NotificationCenter.default.post(
 				name: Notification.Name(rawValue: "AuthUINotification"), object: nil, userInfo: nil)
 		} else {
-			print("🎉🎉🎉 Connected 🎉🎉🎉")
-			// Perform any operations on signed in user here.
-//			let userId = user.userID                  // For client-side use only!
-//			let idToken = user.authentication.idToken // Safe to send to the server
-			let fullName = user.profile.name
-//			let givenName = user.profile.givenName
-//			let familyName = user.profile.familyName
-//			let email = user.profile.email
-			defaultsUser.set(["userID":user.userID,
-			                  "IDToken":user.authentication.idToken,
-			                  "fullName":user.profile.name,
-			                  "givenName":user.profile.givenName,
-			                  "familyName":user.profile.familyName,
-			                  "email":user.profile.email], forKey: "userDict")
+			print("🎉🎉🎉 CONNECTED 🎉🎉🎉")
 			NotificationCenter.default.post(
 				name: Notification.Name(rawValue: "AuthUINotification"),
 				object: nil,
-				userInfo: ["statusText": "Signed in user:\n\(fullName!)"])
+				userInfo: ["statusText": "Signed in user:\n\(user.profile.name!)"])
+			
+			guard let authentication = user.authentication else { return }
+			let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+			                                                  accessToken: authentication.accessToken)
+			controller.firebaseLogin(credential)
 		}
 	}
 	
 	func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
 	          withError error: Error!) {
-		print("🔴🔴🔴 Disconnected 🔴🔴🔴")
+		print("🔴🔴🔴 DISCONNECTED 🔴🔴🔴")
 		// Perform any operations when the user disconnects from app here.
 		// [START_EXCLUDE]
 		NotificationCenter.default.post(
