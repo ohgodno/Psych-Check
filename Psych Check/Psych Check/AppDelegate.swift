@@ -4,23 +4,71 @@
 //  Copyright © 2017 Harrison Crandall. All rights reserved.
 
 import UIKit
+import Foundation
+import UserNotifications
+
 import Firebase
 import FirebaseAuth
+import FirebaseInstanceID
+import FirebaseMessaging
 import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	
 	var window: UIWindow?
-	
+	let gcmMessageIDKey = "gcm.message_id"
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
 		FIRApp.configure()
+		
+		FIRDatabase.database().persistenceEnabled = true
 		
 		GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
 		GIDSignIn.sharedInstance().delegate = self
+		
+		if #available(iOS 10.0, *) {
+			// For iOS 10 display notification (sent via APNS)
+//			UNUserNotificationCenter.current().delegate = self
+			
+			let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+			UNUserNotificationCenter.current().requestAuthorization(
+				options: authOptions,
+				completionHandler: {_, _ in })
+			
+			// For iOS 10 data message (sent via FCM)
+//			FIRMessaging.messaging().remoteMessageDelegate = self
+			
+		} else {
+			let settings: UIUserNotificationSettings =
+				UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+			application.registerUserNotificationSettings(settings)
+		}
+		
+		application.registerForRemoteNotifications()
 		return true
+	}
+	
+	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+		print("🔑🔑🔑 DEVICE TOKEN = \(token) 🔑🔑🔑")
+	}
+	
+	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+		print(error)
+	}
+	
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		print(userInfo)
+		if let messageID = userInfo[gcmMessageIDKey] {
+			print("Message ID: \(messageID)")
+		}
+		print("🙌🙌🙌 NOTIFICATION REVEIVED 🙌🙌🙌")
+		
+		completionHandler(UIBackgroundFetchResult.newData)
+
 	}
 	
 	
@@ -41,13 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
 	          withError error: Error!) {
 		guard let controller = GIDSignIn.sharedInstance().uiDelegate as? PickSignInViewController else { return }
-
+		
 		if let error = error {
 			print("\(error.localizedDescription) (AppDelegate/didSignInFor)")
 			if error.localizedDescription == "The user canceled the sign-in flow." {
 				controller.googleSignInButton.setOriginalState()
 			}
-
+			
 			NotificationCenter.default.post(
 				name: Notification.Name(rawValue: "AuthUINotification"), object: nil, userInfo: nil)
 		} else {

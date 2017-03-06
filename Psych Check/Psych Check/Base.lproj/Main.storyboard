@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,31 +22,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wS0-QC-H0r">
-                                <rect key="frame" x="131" y="318" width="112" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXk-nf-le8">
-                                        <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
-                                        <state key="normal" title="am i depressed?"/>
-                                        <connections>
-                                            <action selector="startTestButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VhM-yd-c16"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3P-5A-N6e">
-                                <rect key="frame" x="125" y="129" width="124" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="sign urself out m8"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXk-nf-le8">
+                                <rect key="frame" x="16" y="309" width="343" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Depression Scale"/>
+                                <connections>
+                                    <action selector="startTestButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VhM-yd-c16"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3P-5A-N6e">
+                                <rect key="frame" x="16" y="609" width="343" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Sign Out"/>
                                 <connections>
                                     <action selector="signOutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xla-t5-ZeT"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wS0-QC-H0r" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Lc-oF-jLx"/>
-                            <constraint firstItem="wS0-QC-H0r" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yc2-di-mVE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dXk-nf-le8" secondAttribute="trailing" id="1wE-BB-0iB"/>
+                            <constraint firstItem="d3P-5A-N6e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6NT-89-oCU"/>
+                            <constraint firstItem="dXk-nf-le8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ICY-og-3m9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="d3P-5A-N6e" secondAttribute="trailing" id="ImN-i4-0Tt"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="d3P-5A-N6e" secondAttribute="bottom" constant="10" id="JtI-ex-b28"/>
+                            <constraint firstItem="dXk-nf-le8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OYi-EJ-VyO"/>
+                            <constraint firstItem="dXk-nf-le8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zRr-4Z-JQN"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
@@ -55,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-815" y="1932"/>
+            <point key="canvasLocation" x="-815.20000000000005" y="1931.7841079460272"/>
         </scene>
         <!--PickSignInViewController-->
         <scene sceneID="j5R-eD-Dp4">
@@ -70,11 +74,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aLa-ld-lVs">
-                                <rect key="frame" x="16" y="491" width="343" height="76"/>
+                                <rect key="frame" x="16" y="343" width="343" height="224"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbq-Jj-mik" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="38"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title="Email/Password">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,7 +99,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5e-Z8-E36" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
-                                        <rect key="frame" x="0.0" y="38" width="343" height="38"/>
+                                        <rect key="frame" x="0.0" y="56" width="343" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title="Google">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,7 +121,8 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="88T-Nx-fU0" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
-                                        <rect key="frame" x="0.0" y="76" width="343" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="112" width="343" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title="Twitter">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -137,7 +143,8 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-4R-RJV" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransitionSwift3">
-                                        <rect key="frame" x="0.0" y="76" width="343" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="168" width="343" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title="Facebook">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,11 +176,22 @@
                                     <constraint firstAttribute="trailing" secondItem="bbq-Jj-mik" secondAttribute="trailing" id="ywV-jl-bnm"/>
                                 </constraints>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PsychCheckBrain" translatesAutoresizingMaskIntoConstraints="NO" id="ym6-5o-dqq">
+                                <rect key="frame" x="16" y="100" width="343" height="257"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ym6-5o-dqq" secondAttribute="height" multiplier="16:12" id="Hr9-iL-Rjw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="ym6-5o-dqq" firstAttribute="centerX" secondItem="MDI-86-Vdg" secondAttribute="centerX" id="4cj-Hg-tTl"/>
+                            <constraint firstItem="ym6-5o-dqq" firstAttribute="width" secondItem="ym6-5o-dqq" secondAttribute="height" multiplier="16:12" id="AxS-Ag-hny"/>
+                            <constraint firstItem="ym6-5o-dqq" firstAttribute="leading" secondItem="MDI-86-Vdg" secondAttribute="leadingMargin" id="Ecc-hJ-mg2"/>
                             <constraint firstItem="L2D-GB-B3g" firstAttribute="top" secondItem="aLa-ld-lVs" secondAttribute="bottom" constant="100" id="Neq-4K-g86"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aLa-ld-lVs" secondAttribute="trailing" id="OU8-Uc-e2R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ym6-5o-dqq" secondAttribute="trailing" id="XTN-D9-DxF"/>
+                            <constraint firstItem="ym6-5o-dqq" firstAttribute="top" secondItem="MDI-86-Vdg" secondAttribute="topMargin" constant="100" id="YbS-gq-LGh"/>
                             <constraint firstItem="aLa-ld-lVs" firstAttribute="leading" secondItem="MDI-86-Vdg" secondAttribute="leadingMargin" id="pUJ-T6-Jd5"/>
                         </constraints>
                     </view>
@@ -205,7 +223,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigationController" title="Navigation Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="14O-zI-ubL" customClass="navigationController" customModule="Psych_Check" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1yn-VJ-age">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1yn-VJ-age">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -231,7 +249,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="b6l-jW-7lN">
-                                <rect key="frame" x="-4" y="20" width="383" height="2.5"/>
+                                <rect key="frame" x="-4" y="20" width="383" height="3"/>
                                 <color key="progressTintColor" red="0.16078431372549018" green="0.38431372549019605" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="0.74117647058823533" green="0.74117647058823533" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
@@ -253,43 +271,63 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kfy-nC-30m">
-                                <rect key="frame" x="16" y="373" width="343" height="192"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Kfy-nC-30m">
+                                <rect key="frame" x="16" y="330" width="343" height="260"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ES-2ev">
-                                        <rect key="frame" x="116" y="0.0" width="111" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BaV-ES-2ev" customClass="BorderedButton" customModule="BorderedButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 1"/>
                                         <connections>
                                             <action selector="option1Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="jRw-bF-nnu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9Qf-Ue-bao">
-                                        <rect key="frame" x="114" y="48" width="115" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9Qf-Ue-bao" customClass="BorderedButton" customModule="BorderedButton">
+                                        <rect key="frame" x="0.0" y="53" width="343" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 2"/>
                                         <connections>
                                             <action selector="option2Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="LsR-Rg-J0a"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Umt-Gf-HbL">
-                                        <rect key="frame" x="113.5" y="96" width="116" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Umt-Gf-HbL" customClass="BorderedButton" customModule="BorderedButton">
+                                        <rect key="frame" x="0.0" y="106" width="343" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 3"/>
                                         <connections>
                                             <action selector="option3Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="RCP-du-ctf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-0q-Im8">
-                                        <rect key="frame" x="113.5" y="144" width="116" height="48"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="fJG-0q-Im8" customClass="BorderedButton" customModule="BorderedButton">
+                                        <rect key="frame" x="0.0" y="159" width="343" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="Option 4"/>
                                         <connections>
                                             <action selector="option4Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="CFG-W3-BVK"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="lhB-qG-oKD" userLabel="Option 5" customClass="BorderedButton" customModule="BorderedButton">
+                                        <rect key="frame" x="0.0" y="212" width="343" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Option 5"/>
+                                        <connections>
+                                            <action selector="option5Button:" destination="En5-0p-XEc" eventType="touchUpInside" id="JIw-fw-4SW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="fJG-0q-Im8" firstAttribute="leading" secondItem="Kfy-nC-30m" secondAttribute="leading" id="1he-Y5-pKo"/>
+                                    <constraint firstItem="9Qf-Ue-bao" firstAttribute="leading" secondItem="Kfy-nC-30m" secondAttribute="leading" id="Ein-WW-pa3"/>
+                                    <constraint firstAttribute="trailing" secondItem="fJG-0q-Im8" secondAttribute="trailing" id="Zjb-hU-1oU"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Qf-Ue-bao" secondAttribute="trailing" id="bB2-I7-ufD"/>
+                                    <constraint firstItem="BaV-ES-2ev" firstAttribute="leading" secondItem="Kfy-nC-30m" secondAttribute="leading" id="fxJ-qx-ACl"/>
+                                    <constraint firstItem="Umt-Gf-HbL" firstAttribute="leading" secondItem="Kfy-nC-30m" secondAttribute="leading" id="iOO-BU-LzP"/>
+                                    <constraint firstAttribute="trailing" secondItem="lhB-qG-oKD" secondAttribute="trailing" id="jBJ-cc-Tqg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Umt-Gf-HbL" secondAttribute="trailing" id="jHm-4Q-Pf2"/>
+                                    <constraint firstItem="lhB-qG-oKD" firstAttribute="leading" secondItem="Kfy-nC-30m" secondAttribute="leading" id="mhG-08-px7"/>
+                                    <constraint firstAttribute="trailing" secondItem="BaV-ES-2ev" secondAttribute="trailing" id="p4F-Dz-U4S"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tlc-vr-yTw">
                                 <rect key="frame" x="516" y="662" width="43" height="0.0"/>
@@ -311,7 +349,7 @@
                         <constraints>
                             <constraint firstItem="Kfy-nC-30m" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="2IZ-MG-MaA"/>
                             <constraint firstItem="CHm-FD-7Gc" firstAttribute="leading" secondItem="gFS-GS-Szf" secondAttribute="leadingMargin" constant="-20" id="4tL-KZ-sjy"/>
-                            <constraint firstItem="CHm-FD-7Gc" firstAttribute="top" secondItem="Kfy-nC-30m" secondAttribute="bottom" constant="50" id="56N-3G-2S8"/>
+                            <constraint firstItem="CHm-FD-7Gc" firstAttribute="top" secondItem="Kfy-nC-30m" secondAttribute="bottom" constant="25" id="56N-3G-2S8"/>
                             <constraint firstItem="CHm-FD-7Gc" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="7Oy-3y-NHD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Gh-Es-Y2x" secondAttribute="trailing" id="CgS-tf-5jP"/>
                             <constraint firstItem="b6l-jW-7lN" firstAttribute="centerX" secondItem="gFS-GS-Szf" secondAttribute="centerX" id="F3e-Ku-Vvz"/>
@@ -346,6 +384,7 @@
                         <outlet property="option2Button" destination="9Qf-Ue-bao" id="fMU-2a-8Ve"/>
                         <outlet property="option3Button" destination="Umt-Gf-HbL" id="u81-kP-Yo8"/>
                         <outlet property="option4Button" destination="fJG-0q-Im8" id="Jhu-nk-2z0"/>
+                        <outlet property="option5Button" destination="lhB-qG-oKD" id="xWf-rQ-myY"/>
                         <outlet property="optionsStackView" destination="Kfy-nC-30m" id="xes-2B-kGd"/>
                         <outlet property="previousQuestion" destination="CHm-FD-7Gc" id="KBf-3t-0H6"/>
                         <outlet property="questionLabel" destination="8Gh-Es-Y2x" id="VZr-9Q-brq"/>
@@ -357,4 +396,7 @@
             <point key="canvasLocation" x="-55" y="1932"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="PsychCheckBrain" width="1024" height="767"/>
+    </resources>
 </document>

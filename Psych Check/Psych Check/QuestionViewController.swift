@@ -5,17 +5,26 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
 import EZSwiftExtensions
+import BorderedButton
 
-public struct test {
+public struct Test {
+	var testName: String!
 	var dateTaken: Date
 	var totalScore: Int
 	var responses: [Question]
+	
 }
 
 public var questionNumber: Int = 0
-public var scalesArray: [scalesFormat] = [Scales.GDS(),Scales.PHQ9()]
-var scale: scalesFormat!
+public var scalesArray: [scalesFormat] = [Scales.GDS(), Scales.PHQ9(), Scales.BDC()]
+public var scale: scalesFormat!
+public var scaleNumber: Int = 0
+public var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
+public var query: FIRDatabaseQuery?
+
 
 public class QuestionViewController: UIViewController {
 	
@@ -23,10 +32,12 @@ public class QuestionViewController: UIViewController {
 	@IBOutlet weak var instructionsLabel: UILabel!
 	@IBOutlet weak var questionLabel: UILabel!
 	@IBOutlet weak var optionsStackView: UIStackView!
-	@IBOutlet weak var option1Button: UIButton!
-	@IBOutlet weak var option2Button: UIButton!
-	@IBOutlet weak var option3Button: UIButton!
-	@IBOutlet weak var option4Button: UIButton!
+	@IBOutlet weak var option1Button: BorderedButton!
+	@IBOutlet weak var option2Button: BorderedButton!
+	@IBOutlet weak var option3Button: BorderedButton!
+	@IBOutlet weak var option4Button: BorderedButton!
+	@IBOutlet weak var option5Button: BorderedButton!
+	
 	
 	@IBOutlet weak var previousQuestion: UIButton!
 	@IBAction func previousQuestion(_ sender: Any) {
@@ -66,15 +77,27 @@ public class QuestionViewController: UIViewController {
 		nextQuestion()
 	}
 	
+	@IBAction func option5Button(_ sender: Any) {
+		print(option4Button.titleLabel!.text!)
+		scale.questions[questionNumber].selectedAnswer = 4
+		scale.questions[questionNumber].selectedAnswerString = option4Button.titleLabel!.text!
+		scale.totalScore += getPointsForAnswer(answer: option4Button.titleLabel!.text!)
+		nextQuestion()
+	}
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		scale = scalesArray.random()
+		scale = scalesArray[scaleNumber]
 		scale.totalScore = 0
 		updateQuestion()
 	}
 	
+	public override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+	}
+	
 	public func nextQuestion() {
+		//		sleep(1)
 		if questionNumber == scale.questions.endIndex-1 {
 			print("done")
 			testFinished()
@@ -86,6 +109,11 @@ public class QuestionViewController: UIViewController {
 	}
 	
 	public func testFinished() {
+		if scaleNumber < 2 {
+			scaleNumber += 1
+		} else {
+			scaleNumber = 0
+		}
 		testProgress.setProgress(1, animated: true)
 		testProgress.progressTintColor = UIColor.init(hexString: "#00C853")
 		createResults()
@@ -96,7 +124,7 @@ public class QuestionViewController: UIViewController {
 			}
 			print("Total Score: \(scale.totalScore)")
 			print(scale.resultsInformation)
-			print(scale.getResultInformation())
+			print(scale.getScoreInformation())
 		})
 		questionNumber = 0
 	}
@@ -108,17 +136,21 @@ public class QuestionViewController: UIViewController {
 	}
 	
 	public func updateQuestion() {
-		print(scale.totalScore)
-		var options = [option1Button, option2Button, option3Button, option4Button]
+		print("Total Score: \(scale.totalScore)")
+		var options = [option1Button, option2Button, option3Button, option4Button, option5Button]
 		instructionsLabel.text! = scale.instructions
 		instructionsLabel.sizeToFit()
 		questionLabel.text = scale.questions[questionNumber].questionString
 		questionLabel.sizeToFit()
-		for i in scale.questions[questionNumber].options.endIndex..<4 {
-			options[i]!.isHidden = true
+		for i in scale.questions[questionNumber].options.endIndex..<5 {
+			//ONLY FOR HIDDEN BUTTONS PLEASE STOP PUTTING STUFF IN HERE
+			options[i]?.isHidden = true
 		}
 		for i in 0..<scale.questions[questionNumber].options.count {
-			options[i]!.setTitle(scale.questions[questionNumber].options[i], for: .normal)
+			options[i]?.setTitle(scale.questions[questionNumber].options[i], for: .normal)
+			options[i]?.titleLabel!.numberOfLines = 1
+			options[i]?.titleLabel?.adjustsFontSizeToFitWidth = true
+			options[i]?.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
 		}
 		previousQuestion.isHidden = questionNumber == 0
 		testProgress.setProgress(Float(questionNumber)/Float(scale.questions.endIndex), animated: true)
@@ -133,6 +165,27 @@ public class QuestionViewController: UIViewController {
 	}
 	
 	public func createResults() {
+		
+		var questionsDictionary: [String: Any] = [:]
+		for i in 0...scale.questions.endIndex-1 {
+			questionsDictionary[scale.questions[i].questionString!] = [
+				"selectedOption":scale.questions[i].selectedAnswerString!,
+				"options": scale.questions[i].options!]
+		}
+		var results: [String:Any] = [:]
+		results["testName"] = scale.testName!
+		results["testTime"] = Date().toString(format: "MM-dd-yyyy hh:mm a")
+		results["instructions"] = scale.instructions!
+		results["questions"] = questionsDictionary
+		results["totalScore"] = scale.totalScore
+		results["resultsInformation"] = scale.resultsInformation!
+		results["scoreInformation"] = scale.getScoreInformation()
+		print(results)
+		guard let user = FIRAuth.auth()?.currentUser else { return }
+		ref.child("users").child(user.uid).child("\(scale.shortTestName!) at \(Date().toString(format: "MM-dd-yyyy hh:mm a"))").setValue(results)
+	}
+	
+	public func getTest() {
 		
 	}
 }

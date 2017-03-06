@@ -90,6 +90,7 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+//		emailTextField.
 		emailTextField.text = ""
 		passwordTextField.text = ""
 		emailTextField.delegate = self
@@ -107,9 +108,9 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		busy.hidesWhenStopped = true
 		view.addSubview(busy)
 		
-		if let lastemail = UserDefaults().string(forKey: "auth_emailaddress") {
-			emailTextField.text = lastemail
-		}
+//		if let lastemail = UserDefaults().string(forKey: "auth_emailaddress") {
+//			emailTextField.text = lastemail
+//		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +127,11 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: nil)
 
 		performSegue(withIdentifier: "unwindFromSignIn", sender: self)
+	}
+	
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		animatedTextInput.resignFirstResponder()
+		return true
 	}
 	
 	func configureView() {
@@ -170,7 +176,7 @@ public struct MaterialTextInputStyle: AnimatedTextInputStyle {
 	public var errorColor: UIColor = UIColor(hexString: "#F44336")!
 	public var textInputFont: UIFont = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 	public var textInputFontColor: UIColor = UIColor.black
-	public var placeholderMinFontSize: CGFloat = 10
+	public var placeholderMinFontSize: CGFloat = 12
 	public var counterLabelFont: UIFont? = UIFont.systemFont(ofSize: UIFont.systemFontSize)
 	public let leftMargin: CGFloat = 25
 	public let topMargin: CGFloat = 20

@@ -5,10 +5,11 @@ target 'Psych Check' do
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
-	pod 'Firebase/Storage'
+	pod 'Firebase/Messaging'
   pod 'GoogleSignIn'
   pod 'TKSubmitTransitionSwift3'
   pod 'EZSwiftExtensions'
-  pod 'RevealingSplashView'
   pod 'AnimatedTextInput'
+  pod 'AlertOnboarding'
+  pod 'BorderedButton'
 end

@@ -89,21 +89,25 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AlertOnboarding/AlertOnboarding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AnimatedTextInput/AnimatedTextInput.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BorderedButton/BorderedButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwiftExtensions/EZSwiftExtensions.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RevealingSplashView/RevealingSplashView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TKSubmitTransitionSwift3/TKSubmitTransitionSwift3.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AlertOnboarding/AlertOnboarding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AnimatedTextInput/AnimatedTextInput.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BorderedButton/BorderedButton.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZSwiftExtensions/EZSwiftExtensions.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMOAuth2/GTMOAuth2.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GTMSessionFetcher/GTMSessionFetcher.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RevealingSplashView/RevealingSplashView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TKSubmitTransitionSwift3/TKSubmitTransitionSwift3.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

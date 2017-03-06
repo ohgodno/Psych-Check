@@ -30,7 +30,7 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {(action) in
 			UserDefaults().set(user.email, forKey: "auth_emailaddress")
 			UserDefaults().synchronize()
-			self.dismiss(animated: true, completion: nil)
+			self.performSegue(withIdentifier: "unwindFromSignIn", sender: self)
 		}))
 		self.present(alert, animated: true, completion: {() -> Void in })
 	}
@@ -123,6 +123,11 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
+	}
+	
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		animatedTextInput.resignFirstResponder()
+		return true
 	}
 	
 	func configureView() {

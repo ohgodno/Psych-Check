@@ -19,14 +19,6 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
-	// MARK: Segues
-	
-	func handleSuccess () {
-		self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
-	}
-	
-	// MARK: Sign In
-	
 	@IBAction func sendButtonTapped(_ sender: UIButton) {
 		guard let email = emailTextField.text else { return }
 		
@@ -60,17 +52,11 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		}
 	}
 	
-	// MARK: View Lifecycle
-	
 	@IBOutlet weak var emailTextField: AnimatedTextInput!
 	@IBOutlet weak var sendButton: UIButton!
 	var busy = UIActivityIndicatorView()
 	
-	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
-		configureViewEdit()
-	}
 	
-	// Invoked after after the view controller has loaded its view hierarchy into memory, but only then. Not before every display
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		emailTextField.delegate = self
@@ -89,19 +75,22 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		}
 	}
 	
-	// Invoked after viewDidLoad, and invoked every time the view is dispalyed (e.g. tab change, exit segue)
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
 		self.configureViewEdit()
 	}
 	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
+	func handleSuccess () {
+		self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
 	}
 	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
+	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
+		configureViewEdit()
+	}
+	
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		animatedTextInput.resignFirstResponder()
+		return true
 	}
 	
 	func configureViewBusy () {

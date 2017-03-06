@@ -44,10 +44,7 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	@IBAction func googleSignInButton(_ sender: Any) {
 		selectedSignIn.name = "Google"
 		selectedSignIn.color = UIColor(hexString: "#4285F4")
-		GIDSignIn.sharedInstance().uiDelegate = self
-		googleSignInButton.animate(1, completion: {
-			GIDSignIn.sharedInstance().signIn()
-		})
+		signInButtonPressed(googleSignInButton)
 	}
 	
 	@IBAction func twitterSignInButton(_ sender: Any) {
@@ -65,6 +62,7 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	
 	public func signInButtonPressed(_ button: TKTransitionSubmitButton) {
 		button.superview?.bringSubview(toFront: button)
+		button.superview?.superview?.bringSubview(toFront: button)
 		button.animate(0.5, completion: { () -> () in
 			if button == self.emailPasswordSignInButton {
 				let authVC = UIStoryboard(name: "Authentication", bundle: nil).instantiateViewController(withIdentifier: "SignInEmailViewController")
@@ -74,15 +72,12 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 				GIDSignIn.sharedInstance().signIn()
 			}
 		})
-//		if button == self.emailPasswordSignInButton {
-//			self.performSegue(withIdentifier: "showAuthSignIn", sender: self)
-//		}
 	}
 	
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
-		
+		GIDSignIn.sharedInstance().uiDelegate = self
 		for button in [emailPasswordSignInButton, googleSignInButton, twitterSignInButton, facebookSignInButton] {
 			button!.normalCornerRadius = min(emailPasswordSignInButton.frame.width / 2 , emailPasswordSignInButton.frame.height / 2)
 		}
