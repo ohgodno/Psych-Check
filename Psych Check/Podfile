@@ -12,4 +12,6 @@ target 'Psych Check' do
   pod 'AnimatedTextInput'
   pod 'AlertOnboarding'
   pod 'BorderedButton'
+  pod 'ScrollableGraphView'
+  pod 'paper-onboarding'
 end

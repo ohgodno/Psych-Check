@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8428AB9A1E6DAA1600A00206 /* AccountCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428AB991E6DAA1600A00206 /* AccountCreatorViewController.swift */; };
 		845ABE481E4A5ED400D232DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845ABE461E4A5ED400D232DC /* Main.storyboard */; };
 		845ABE4D1E4A5ED400D232DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845ABE4B1E4A5ED400D232DC /* LaunchScreen.storyboard */; };
 		845ABE581E4A5ED400D232DC /* Psych_CheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE571E4A5ED400D232DC /* Psych_CheckTests.swift */; };
@@ -16,12 +17,11 @@
 		845ABE771E4A5F0800D232DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845ABE751E4A5F0800D232DC /* ViewController.swift */; };
 		846140471E4AD6F70076F911 /* Scales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846140461E4AD6F70076F911 /* Scales.swift */; };
 		846140491E4AE4FD0076F911 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846140481E4AE4FD0076F911 /* QuestionViewController.swift */; };
-		84678E821E60E4940022C94E /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84678E801E60E4940022C94E /* AuthViewController.swift */; };
-		84678E831E60E4940022C94E /* AuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84678E811E60E4940022C94E /* AuthViewController.xib */; };
+		846862DF1E771D28007360E4 /* ViewScalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846862DE1E771D28007360E4 /* ViewScalesViewController.swift */; };
 		846D5CD41E5C839100E1E276 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846D5CD31E5C839100E1E276 /* GoogleService-Info.plist */; };
 		846D5CD51E5C839800E1E276 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846D5CD31E5C839100E1E276 /* GoogleService-Info.plist */; };
 		846D5CD61E5C839900E1E276 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846D5CD31E5C839100E1E276 /* GoogleService-Info.plist */; };
-		849D85FF1E5E79220029CE2E /* DigitalCatnipExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D85FE1E5E79220029CE2E /* DigitalCatnipExtensions.swift */; };
+		8477DD861EA845F90006530C /* wireframe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8477DD851EA845F90006530C /* wireframe.storyboard */; };
 		849D86051E5EA0830029CE2E /* PickSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D86041E5EA0830029CE2E /* PickSignInViewController.swift */; };
 		84AF6D4A1E636F4F00C4B07C /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6D491E636F4F00C4B07C /* Authentication.storyboard */; };
 		84AF6D4C1E6375D400C4B07C /* SignInEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6D4B1E6375D400C4B07C /* SignInEmailViewController.swift */; };
@@ -50,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		3AEC9B0F792D661A0050812C /* Pods_Psych_Check.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Psych_Check.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8428AB991E6DAA1600A00206 /* AccountCreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCreatorViewController.swift; sourceTree = "<group>"; };
 		845ABE3F1E4A5ED400D232DC /* Psych Check.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Psych Check.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		845ABE471E4A5ED400D232DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		845ABE4C1E4A5ED400D232DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,10 +66,9 @@
 		845ABE751E4A5F0800D232DC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		846140461E4AD6F70076F911 /* Scales.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scales.swift; sourceTree = "<group>"; };
 		846140481E4AE4FD0076F911 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		84678E801E60E4940022C94E /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
-		84678E811E60E4940022C94E /* AuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthViewController.xib; sourceTree = "<group>"; };
+		846862DE1E771D28007360E4 /* ViewScalesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewScalesViewController.swift; sourceTree = "<group>"; };
 		846D5CD31E5C839100E1E276 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		849D85FE1E5E79220029CE2E /* DigitalCatnipExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitalCatnipExtensions.swift; sourceTree = "<group>"; };
+		8477DD851EA845F90006530C /* wireframe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = wireframe.storyboard; sourceTree = "<group>"; };
 		849D86041E5EA0830029CE2E /* PickSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickSignInViewController.swift; sourceTree = "<group>"; };
 		84AF6D491E636F4F00C4B07C /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		84AF6D4B1E6375D400C4B07C /* SignInEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInEmailViewController.swift; sourceTree = "<group>"; };
@@ -131,21 +131,20 @@
 		845ABE411E4A5ED400D232DC /* Psych Check */ = {
 			isa = PBXGroup;
 			children = (
-				845ABE741E4A5F0800D232DC /* AppDelegate.swift */,
 				84E515461E622FD1000BCA90 /* NavigationController.swift */,
 				849D86041E5EA0830029CE2E /* PickSignInViewController.swift */,
 				845ABE751E4A5F0800D232DC /* ViewController.swift */,
 				846140481E4AE4FD0076F911 /* QuestionViewController.swift */,
-				846140461E4AD6F70076F911 /* Scales.swift */,
+				846862DE1E771D28007360E4 /* ViewScalesViewController.swift */,
 				845ABE461E4A5ED400D232DC /* Main.storyboard */,
+				8477DD851EA845F90006530C /* wireframe.storyboard */,
 				84FCCB331E63511F001BF7B6 /* Authentication */,
 				845ABE4B1E4A5ED400D232DC /* LaunchScreen.storyboard */,
 				846D5CD31E5C839100E1E276 /* GoogleService-Info.plist */,
 				845ABE721E4A5EF400D232DC /* Info.plist */,
-				84678E801E60E4940022C94E /* AuthViewController.swift */,
-				84678E811E60E4940022C94E /* AuthViewController.xib */,
+				846140461E4AD6F70076F911 /* Scales.swift */,
+				845ABE741E4A5F0800D232DC /* AppDelegate.swift */,
 				845ABE701E4A5EEA00D232DC /* Assets.xcassets */,
-				849D85FE1E5E79220029CE2E /* DigitalCatnipExtensions.swift */,
 				84CF77C31E6D1E0C0095790E /* Psych Check.entitlements */,
 			);
 			path = "Psych Check";
@@ -174,6 +173,7 @@
 			children = (
 				84AF6D4B1E6375D400C4B07C /* SignInEmailViewController.swift */,
 				84AF6D4D1E63789B00C4B07C /* SignUpEmailViewController.swift */,
+				8428AB991E6DAA1600A00206 /* AccountCreatorViewController.swift */,
 				84AF6D4F1E637EE500C4B07C /* ForgotEmailViewController.swift */,
 				84AF6D491E636F4F00C4B07C /* Authentication.storyboard */,
 			);
@@ -271,6 +271,9 @@
 						DevelopmentTeam = FN263CWNU6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -316,7 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AF6D4A1E636F4F00C4B07C /* Authentication.storyboard in Resources */,
-				84678E831E60E4940022C94E /* AuthViewController.xib in Resources */,
+				8477DD861EA845F90006530C /* wireframe.storyboard in Resources */,
 				845ABE4D1E4A5ED400D232DC /* LaunchScreen.storyboard in Resources */,
 				846D5CD41E5C839100E1E276 /* GoogleService-Info.plist in Resources */,
 				845ABE711E4A5EEA00D232DC /* Assets.xcassets in Resources */,
@@ -395,15 +398,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846862DF1E771D28007360E4 /* ViewScalesViewController.swift in Sources */,
 				845ABE761E4A5F0800D232DC /* AppDelegate.swift in Sources */,
+				8428AB9A1E6DAA1600A00206 /* AccountCreatorViewController.swift in Sources */,
 				84AF6D4C1E6375D400C4B07C /* SignInEmailViewController.swift in Sources */,
 				846140471E4AD6F70076F911 /* Scales.swift in Sources */,
 				849D86051E5EA0830029CE2E /* PickSignInViewController.swift in Sources */,
 				84E515471E622FD1000BCA90 /* NavigationController.swift in Sources */,
-				84678E821E60E4940022C94E /* AuthViewController.swift in Sources */,
 				846140491E4AE4FD0076F911 /* QuestionViewController.swift in Sources */,
 				84AF6D4E1E63789B00C4B07C /* SignUpEmailViewController.swift in Sources */,
-				849D85FF1E5E79220029CE2E /* DigitalCatnipExtensions.swift in Sources */,
 				84AF6D501E637EE500C4B07C /* ForgotEmailViewController.swift in Sources */,
 				845ABE771E4A5F0800D232DC /* ViewController.swift in Sources */,
 			);

@@ -69,10 +69,6 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		busy.center = sendButton.center
 		busy.hidesWhenStopped = true
 		view.addSubview(busy)
-		
-		if let lastemail = UserDefaults().string(forKey: "auth_emailaddress") {
-			emailTextField.text = lastemail
-		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -81,21 +77,18 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	}
 	
 	func handleSuccess () {
-		self.performSegue(withIdentifier: "unwindToSignIn", sender: self)
-	}
-	
-	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
-		configureViewEdit()
-	}
-	
-	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
-		animatedTextInput.resignFirstResponder()
-		return true
+		let alertController = UIAlertController(title: "Check your email", message: "A message to reset your password was sent to your email", preferredStyle: .alert)
+		let OKAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+			self.dismiss(animated: true, completion: nil)
+//			self.present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationController"), animated: true, completion: nil)
+		})
+		alertController.addAction(OKAction)
+		self.present(alertController, animated: true, completion: nil)
 	}
 	
 	func configureViewBusy () {
 		sendButton.isEnabled = false
-		sendButton.alpha = 0.33
+		sendButton.alpha = 0.5
 		sendButton.setTitle("", for: .disabled)
 		busy.startAnimating()
 	}
@@ -112,7 +105,7 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	func configureViewEdit () {
 		if emailTextField.text == "" {
 			sendButton.isEnabled = false
-			sendButton.alpha = 0.33
+			sendButton.alpha = 0.5
 		}
 		else {
 			sendButton.isEnabled = true
@@ -120,10 +113,13 @@ class ForgotEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		}
 	}
 	
-	// MARK: Editing
-	
-	@IBAction func emailChanged(_ sender: UITextField) {
+	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
 		configureViewEdit()
+	}
+	
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		let _ = animatedTextInput.resignFirstResponder()
+		return true
 	}
 }
 

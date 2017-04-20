@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 	
 	func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 		let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-		print("🔑🔑🔑 DEVICE TOKEN = \(token) 🔑🔑🔑")
+		print("DEVICE TOKEN = \(token)")
 	}
 	
 	func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

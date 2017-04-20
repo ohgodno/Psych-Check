@@ -13,27 +13,12 @@ import GoogleSignIn
 
 class navigationController : UINavigationController {
 	
-	@IBAction func unwindtoNC(segue: UIStoryboardSegue) {	}
-	
-//	let authVC = AuthViewController(nibName: "AuthViewController", bundle: nil)
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if FIRAuth.auth()?.currentUser != nil {
 			self.pushViewController((self.storyboard?.instantiateViewController(withIdentifier: "ViewController"))!, animated: true)
 		} else {
-			self.pushViewController((self.storyboard?.instantiateViewController(withIdentifier: "PickSignInViewController"))!, animated: true)
+			self.pushViewController((self.storyboard?.instantiateViewController(withIdentifier: "PickSignInViewController"))!, animated: false)
 		}
 	}
 }
-
-extension UIViewController {
-	func performSegueToReturnBack()  {
-		if let nav = self.navigationController {
-			nav.popViewController(animated: true)
-		} else {
-			self.dismiss(animated: true, completion: nil)
-		}
-	}
-}
-

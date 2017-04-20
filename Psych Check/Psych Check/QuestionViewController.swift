@@ -22,11 +22,13 @@ public var questionNumber: Int = 0
 public var scalesArray: [scalesFormat] = [Scales.GDS(), Scales.PHQ9(), Scales.BDC()]
 public var scale: scalesFormat!
 public var scaleNumber: Int = 0
-public var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
-public var query: FIRDatabaseQuery?
+
 
 
 public class QuestionViewController: UIViewController {
+	
+	public var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
+	public var query: FIRDatabaseQuery?
 	
 	@IBOutlet weak var testProgress: UIProgressView!
 	@IBOutlet weak var instructionsLabel: UILabel!
@@ -117,6 +119,7 @@ public class QuestionViewController: UIViewController {
 		testProgress.setProgress(1, animated: true)
 		testProgress.progressTintColor = UIColor.init(hexString: "#00C853")
 		createResults()
+		let _  = navigationController?.popViewController(animated: true)
 		self.dismiss(animated: true, completion: {
 			print("Results: ")
 			for i in 0..<scale.questions.endIndex {
@@ -174,13 +177,14 @@ public class QuestionViewController: UIViewController {
 		}
 		var results: [String:Any] = [:]
 		results["testName"] = scale.testName!
+		results["shortTestName"] = scale.shortTestName
 		results["testTime"] = Date().toString(format: "MM-dd-yyyy hh:mm a")
 		results["instructions"] = scale.instructions!
 		results["questions"] = questionsDictionary
 		results["totalScore"] = scale.totalScore
 		results["resultsInformation"] = scale.resultsInformation!
 		results["scoreInformation"] = scale.getScoreInformation()
-		print(results)
+//		print(results)
 		guard let user = FIRAuth.auth()?.currentUser else { return }
 		ref.child("users").child(user.uid).child("\(scale.shortTestName!) at \(Date().toString(format: "MM-dd-yyyy hh:mm a"))").setValue(results)
 	}

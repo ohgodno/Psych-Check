@@ -59,7 +59,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ScrollableGraphView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TKSubmitTransitionSwift3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>paper-onboarding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

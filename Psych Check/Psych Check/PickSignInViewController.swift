@@ -25,15 +25,12 @@ public var selectedSignIn: SignInSelection! = SignInSelection()
 
 public class PickSignInViewController: UIViewController,UIViewControllerTransitioningDelegate,GIDSignInUIDelegate {
 	
-	@IBAction func unwindFromSignIn(segue: UIStoryboardSegue) {
-		
-	}
-	
 	@IBOutlet weak var emailPasswordSignInButton: TKTransitionSubmitButton!
 	@IBOutlet weak var googleSignInButton: TKTransitionSubmitButton!
 	@IBOutlet weak var twitterSignInButton: TKTransitionSubmitButton!
 	@IBOutlet weak var facebookSignInButton: TKTransitionSubmitButton!
 	
+	@IBOutlet weak var psychCheckBrainImage: UIImageView!
 	
 	@IBAction func emailPasswordSignInButton(_ sender: Any) {
 		selectedSignIn.name = "Email/Password"
@@ -62,12 +59,15 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 	
 	public func signInButtonPressed(_ button: TKTransitionSubmitButton) {
 		button.superview?.bringSubview(toFront: button)
-		button.superview?.superview?.bringSubview(toFront: button)
-		button.animate(0.5, completion: { () -> () in
+		self.view.sendSubview(toBack: psychCheckBrainImage)
+		self.view.bringSubview(toFront: button)
+		button.animate(0.25, completion: { () -> () in
 			if button == self.emailPasswordSignInButton {
 				let authVC = UIStoryboard(name: "Authentication", bundle: nil).instantiateViewController(withIdentifier: "SignInEmailViewController")
 				authVC.transitioningDelegate = self
-				self.present(authVC, animated: true, completion: nil)
+				self.present(authVC, animated: true, completion: {
+					button.returnToOriginalState()
+				})
 			} else if button == self.googleSignInButton {
 				GIDSignIn.sharedInstance().signIn()
 			}
@@ -99,9 +99,15 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 		if FIRAuth.auth()?.currentUser != nil {
 			print("✅✅✅ USER SIGNED IN ✅✅✅ (\(sender ?? ""))")
 			let NC = self.storyboard?.instantiateViewController(withIdentifier: "navigationController")
-			self.present(NC!, animated: true, completion: nil)
+			let transition = CATransition()
+			transition.duration = 0.3
+			transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+			transition.type = kCATransitionPush
+			transition.subtype = kCATransitionFromRight
+			view.window!.layer.add(transition, forKey: kCATransition)
+			present(NC!, animated: false, completion: nil)
 		} else {
-			print("❎❎❎ USER NOT SIGNED IN ❎❎❎ (\(sender ?? ""))")
+			print("🛑🛑🛑 USER NOT SIGNED IN 🛑🛑🛑 (\(sender ?? ""))")
 		}
 	}
 	
@@ -110,9 +116,7 @@ public class PickSignInViewController: UIViewController,UIViewControllerTransiti
 			if notification.userInfo != nil {
 				guard let userInfo = notification.userInfo as? [String:String] else { return }
 				print(userInfo["statusText"]! + "receiveAuthUINotification")
-				googleSignInButton.startFinishAnimation(0, completion: {
-					self.checkAndDismiss(sender: "receiveAuthUINotification")
-				})
+				self.checkAndDismiss(sender: "receiveAuthUINotification")
 			}
 		}
 	}

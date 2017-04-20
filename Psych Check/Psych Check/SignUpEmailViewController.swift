@@ -15,27 +15,15 @@ import FirebaseAuth
 
 class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	
+	@IBOutlet weak var nameTextField: AnimatedTextInput!
+	@IBOutlet weak var emailTextField: AnimatedTextInput!
+	@IBOutlet weak var passwordTextField: AnimatedTextInput!
+	@IBOutlet weak var confirmPasswordTextField: AnimatedTextInput!
+	@IBOutlet weak var signUpButton: UIButton!
+	
 	@IBAction func returnToSignInButton(_ sender: Any) {
 		self.dismiss(animated: true, completion: nil)
 	}
-	
-	// MARK: Segues
-	
-	func handleSuccess (forUser user: FIRUser) {
-		// Log an event with Firebase Analytics. See FIREventNames.h for pre-defined event strings
-		FIRAnalytics.logEvent(withName: kFIREventSignUp, parameters: nil)
-		
-		let newemail = user.email ?? "your email address"
-		let alert = UIAlertController(title: "Success", message: "You have a new account for \(newemail)", preferredStyle: .alert)
-		alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {(action) in
-			UserDefaults().set(user.email, forKey: "auth_emailaddress")
-			UserDefaults().synchronize()
-			self.performSegue(withIdentifier: "unwindFromSignIn", sender: self)
-		}))
-		self.present(alert, animated: true, completion: {() -> Void in })
-	}
-	
-	// MARK: Sign Up
 	
 	@IBAction func signUpButtonTapped(_ sender: UIButton) {
 		guard let email = emailTextField.text else { return }
@@ -45,9 +33,7 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		
 		// Create a new user with Firebase using the email provider. Callback with FIRUser, Error with _code = FIRAuthErrorCode
 		FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-			
 			self.configureViewNotBusy()
-			
 			if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
 				switch errorCode {
 				case .errorCodeWeakPassword:
@@ -64,10 +50,9 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 					self.present(alert, animated: true, completion: {() -> Void in })
 				default:
 					let alert = UIAlertController(title: "Error", message: "Here is the message from Firebase: \(error.localizedDescription)", preferredStyle: .alert)
-					alert.addAction(UIAlertAction(title: "Whoops", style: .default, handler: {(action) -> Void in }))
+					alert.addAction(UIAlertAction(title: "Try again in a few minutes", style: .default, handler: {(action) -> Void in }))
 					self.present(alert, animated: true, completion: {() -> Void in })
 				}
-				
 				return
 			}
 			
@@ -84,29 +69,30 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		}
 	}
 	
-	
-	// MARK: View Lifecycle
-	
-	@IBOutlet weak var emailTextField: AnimatedTextInput!
-	@IBOutlet weak var passwordTextField: AnimatedTextInput!
-	@IBOutlet weak var signUpButton: UIButton!
-	
-	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
-		configureViewEdit()
-	}
-	
 	var busy = UIActivityIndicatorView()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		nameTextField.delegate = self
 		emailTextField.delegate = self
 		passwordTextField.delegate = self
+		confirmPasswordTextField.delegate = self
+		
+		nameTextField.placeHolderText = "Full Name"
+		nameTextField.type = .standard
+		nameTextField.style = MaterialTextInputStyle()
+		
 		emailTextField.placeHolderText = "Email"
 		emailTextField.type = .email
 		emailTextField.style = MaterialTextInputStyle()
+		
 		passwordTextField.placeHolderText = "Password"
 		passwordTextField.type = .password
 		passwordTextField.style = MaterialTextInputStyle()
+		
+		confirmPasswordTextField.placeHolderText = "Confirm Password"
+		confirmPasswordTextField.type = .password
+		confirmPasswordTextField.style = MaterialTextInputStyle()
 		
 		busy = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: signUpButton.frame.height, height: signUpButton.frame.height))
 		busy.activityIndicatorViewStyle = .white
@@ -115,57 +101,71 @@ class SignUpEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		view.addSubview(busy)
 	}
 	
+	func handleSuccess (forUser user: FIRUser) {
+		// Log an event with Firebase Analytics. See FIREventNames.h for pre-defined event strings
+		FIRAnalytics.logEvent(withName: kFIREventSignUp, parameters: nil)
+		let newemail = user.email ?? "your email address"
+		let alert = UIAlertController(title: "Success", message: "You have a new account for \(newemail)", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {(action) in
+			UserDefaults().set(user.email, forKey: "auth_emailaddress")
+			UserDefaults().synchronize()
+			let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest()
+			changeRequest?.displayName = (self.nameTextField.text)!
+			changeRequest?.commitChanges() { (error) in
+				if let error = error {
+					print("🔴🔴🔴 DisplayName Error: \(error.localizedDescription) 🔴🔴🔴")
+				}
+				print("🆗🆗🆗 Display Name: \((FIRAuth.auth()?.currentUser?.displayName)!) 🆗🆗🆗")
+			}
+			let NC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationController")
+			self.present(NC, animated: true, completion: nil)
+		}))
+		self.present(alert, animated: true, completion: {() -> Void in	})
+	}
+	
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
 		self.configureViewEdit()
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
-	
-	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
-		animatedTextInput.resignFirstResponder()
-		return true
-	}
-	
-	func configureView() {
-		configureViewEdit()
 	}
 	
 	func configureViewBusy () {
 		signUpButton.isEnabled = false
-		signUpButton.alpha = 0.33
-		signUpButton.setTitle("", for: .disabled)
+		signUpButton.alpha = 0.5
+		signUpButton.setTitle("Continue", for: .disabled)
 		busy.startAnimating()
 	}
 	
 	func configureViewNotBusy () {
 		busy.stopAnimating()
-		signUpButton.setTitle("Sign Up", for: .disabled)
+		signUpButton.setTitle("Continue", for: .disabled)
 		signUpButton.isEnabled = true
 		signUpButton.alpha = 1.0
 	}
 	
 	func configureViewEdit () {
-		if emailTextField.text == "" || passwordTextField.text == "" {
+		passwordTextField.clearError()
+		confirmPasswordTextField.clearError()
+		if passwordTextField.text != confirmPasswordTextField.text &&
+			!(passwordTextField.text?.isBlank)! && !(confirmPasswordTextField.text?.isBlank)! {
+			passwordTextField.show(error: "Passwords do not match")
+			confirmPasswordTextField.show(error: "Passwords do not match")
+		} else if ((nameTextField.text?.isBlank)! && (emailTextField.text?.isBlank)! && (passwordTextField.text?.isBlank)! && (confirmPasswordTextField.text?.isBlank)!)  {
 			signUpButton.isEnabled = false
-			signUpButton.alpha = 0.33
+			signUpButton.alpha = 0.5
+			
 		} else {
 			signUpButton.isEnabled = true
 			signUpButton.alpha = 1.0
 		}
 	}
 	
-	
-	
-	@IBAction func emailChanged(_ sender: UITextField) {
+	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
 		configureViewEdit()
 	}
 	
-	@IBAction func passwordChanged(_ sender: UITextField) {
-		configureViewEdit()
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		let _ = animatedTextInput.resignFirstResponder()
+		return true
 	}
-	
 }

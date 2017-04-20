@@ -16,24 +16,13 @@ import FirebaseAuth
 class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	
 	@IBAction func canelButton(_ sender: Any) {
-		performSegue(withIdentifier: "unwindFromSignIn", sender: self)
-	}
-	
-	
-	// Return point for any downstream views such as Sign Up
-	@IBAction func unwindToSignIn(segue: UIStoryboardSegue) {
-		if let user = FIRAuth.auth()?.currentUser {
-			handleSuccess(forUser: user)
-		}
+		let NC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationController")
+		present(NC, animated: true, completion: nil)
 	}
 	
 	@IBOutlet weak var emailTextField: AnimatedTextInput!
 	@IBOutlet weak var passwordTextField: AnimatedTextInput!
 	@IBOutlet weak var loginButton: UIButton!
-	
-	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
-		configureViewEdit()
-	}
 	
 	var busy = UIActivityIndicatorView()
 	
@@ -87,10 +76,13 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 			self.handleSuccess(forUser: user)
 		}
 	}
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-//		emailTextField.
+		if let user = FIRAuth.auth()?.currentUser {
+			handleSuccess(forUser: user)
+		}
+		//		emailTextField.
 		emailTextField.text = ""
 		passwordTextField.text = ""
 		emailTextField.delegate = self
@@ -108,9 +100,9 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		busy.hidesWhenStopped = true
 		view.addSubview(busy)
 		
-//		if let lastemail = UserDefaults().string(forKey: "auth_emailaddress") {
-//			emailTextField.text = lastemail
-//		}
+		//		if let lastemail = UserDefaults().string(forKey: "auth_emailaddress") {
+		//			emailTextField.text = lastemail
+		//		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -125,22 +117,14 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 		
 		// Log an event with Firebase Analytics. See FIREventNames.h for pre-defined event strings
 		FIRAnalytics.logEvent(withName: kFIREventLogin, parameters: nil)
-
-		performSegue(withIdentifier: "unwindFromSignIn", sender: self)
-	}
-	
-	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
-		animatedTextInput.resignFirstResponder()
-		return true
-	}
-	
-	func configureView() {
-		configureViewEdit()
+		
+		let NC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navigationController")
+		present(NC, animated: true, completion: nil)
 	}
 	
 	func configureViewBusy () {
 		loginButton.isEnabled = false
-		loginButton.alpha = 0.33
+		loginButton.alpha = 0.5
 		loginButton.setTitle("", for: .disabled)
 		busy.startAnimating()
 	}
@@ -153,9 +137,9 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	}
 	
 	func configureViewEdit () {
-		if emailTextField.text == "" || passwordTextField.text == "" {
+		if (emailTextField.text?.isBlank)! || (passwordTextField.text?.isBlank)! {
 			loginButton.isEnabled = false
-			loginButton.alpha = 0.33
+			loginButton.alpha = 0.5
 		}
 		else {
 			loginButton.isEnabled = true
@@ -166,6 +150,15 @@ class SignInEmailViewController: UIViewController, AnimatedTextInputDelegate {
 	func clearPassword() {
 		passwordTextField.text = ""
 		configureViewEdit()
+	}
+	
+	func animatedTextInputDidChange(animatedTextInput: AnimatedTextInput) {
+		configureViewEdit()
+	}
+	
+	func animatedTextInputShouldReturn(animatedTextInput: AnimatedTextInput) -> Bool {
+		let _ = animatedTextInput.resignFirstResponder()
+		return true
 	}
 }
 
@@ -181,7 +174,7 @@ public struct MaterialTextInputStyle: AnimatedTextInputStyle {
 	public let leftMargin: CGFloat = 25
 	public let topMargin: CGFloat = 20
 	public let rightMargin: CGFloat = 0
-	public let bottomMargin: CGFloat = 10
+	public let bottomMargin: CGFloat = 5
 	public let yHintPositionOffset: CGFloat = 7
 	public let yPlaceholderPositionOffset: CGFloat = 0
 }

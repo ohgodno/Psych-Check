@@ -62,7 +62,9 @@ PODS:
   - GTMSessionFetcher/Core (1.1.8)
   - GTMSessionFetcher/Full (1.1.8):
     - GTMSessionFetcher/Core (= 1.1.8)
+  - paper-onboarding (2.0.1)
   - Protobuf (3.2.0)
+  - ScrollableGraphView (3.1.0)
   - TKSubmitTransitionSwift3 (0.5)
 
 DEPENDENCIES:
@@ -76,6 +78,8 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - GoogleSignIn
+  - paper-onboarding
+  - ScrollableGraphView
   - TKSubmitTransitionSwift3
 
 SPEC CHECKSUMS:
@@ -96,9 +100,11 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
   Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
+  ScrollableGraphView: e2c8bedc7bbb643e8ac57b9456070d68355c4e4c
   TKSubmitTransitionSwift3: fadd76eefa015542d0fe6d85424a43dd6f3354d2
 
-PODFILE CHECKSUM: e5b9086e7557689b430e31e264a4419d55f0ce1f
+PODFILE CHECKSUM: 762650de0278a7cc419902edc9150e257b8b1369
 
 COCOAPODS: 1.2.0
